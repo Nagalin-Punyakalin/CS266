@@ -1,6 +1,6 @@
 const router = require('express').Router()
 
-router.get('/add-product',(req,res)=>{
+router.put('/add-product',(req,res)=>{
     res.sendStatus(200)
 })
 
