@@ -22,7 +22,7 @@ describe('Unit test for adding a new product', () => {
     it('should send a status code of 201 when adding a new product', async () => {
       Product.findOne.mockImplementationOnce(()=>null)
         const response = await request(app)
-            .put('/add-product')
+            .put('/admin/add-product')
             .field('name', 'demo')
             .field('price', 20)
             .attach('image', path.join(__dirname,'test.jpg'));
@@ -37,7 +37,7 @@ describe('Unit test for adding a new product', () => {
             imageUrl:"path"
         }))
           const response = await request(app)
-              .put('/add-product')
+              .put('/admin/add-product')
               .field('name', 'conflict')
               .field('price', 30)
               .attach('image', path.join(__dirname,'test.jpg'));
@@ -51,7 +51,7 @@ describe('Unit test for adding a new product', () => {
         });
         
           const response = await request(app)
-              .put('/add-product')
+              .put('/admin/add-product')
               .field('name', 'demo')
               .field('price', 20)
               .attach('image', path.join(__dirname,'test.jpg'));
@@ -60,7 +60,7 @@ describe('Unit test for adding a new product', () => {
 
      it('should send a status code of 400 when the data is incomplete',async()=>{
         const response = await request(app)
-            .put('/add-product')
+              .put('/admin/add-product')
 
         expect(response.status).toBe(400)
       })

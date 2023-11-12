@@ -36,7 +36,8 @@ router.put('/add-product',upload.single('image'),checkProductPayload ,async (req
                     fs.unlinkSync(filePath);
                 }
             });
-            return res.sendStatus(409)
+            return res.status(409)
+            .json({message : 'Your product is already exists in the store'})
         }
 
         const product = new Product({
@@ -46,11 +47,13 @@ router.put('/add-product',upload.single('image'),checkProductPayload ,async (req
         })
 
         await product.save()
-        res.status(201).end()
+        res.status(201).json({ message: 'Product added successfully' });
+
         
     } catch (error) {
         console.log(error)
-        res.sendStatus(500)
+        res.status(500)
+        .json({message: 'Internal server error, please try again later'})
     }
 });
 
