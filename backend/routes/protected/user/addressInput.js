@@ -1,7 +1,6 @@
 const router = require('express').Router()
 const mongoose = require('mongoose');
 
-<<<<<<< HEAD
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 const Address = mongoose.model('Address', addressSchema);
@@ -23,10 +22,6 @@ router.post('/addAddress', async (req, res) => {
     console.error('Error adding address:', error);
     res.status(500).send('Internal Server Error');
   }
-=======
-router.post('/addAddress', (req, res) => { 
-  res.sendStatus(200)
->>>>>>> d49c9f2d78b3f5d10bc50073bbbc59e3e12d4ab5
 });
 
 module.exports = router;
