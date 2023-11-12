@@ -18,14 +18,12 @@ export default function useAddProduct() {
         axios.put('/admin/add-product',formData)
         .then(response=>{
             if(response.status === 201) {
-                Swal.fire('Product added successfully', '', 'success')
+                Swal.fire(response.data.message, '', 'success')
             }
         })
         .catch(err=>{
             console.log(err)
-            if(err.response.status === 409) setError('Your product is already exists in the store')
-            if(err.response.status === 500) setError('Internal server error, please try again later')
-            if(err.response.status === 400) setError('Something went wrong , please try again later')
+            setError(err.data.message)
         })
     }
 

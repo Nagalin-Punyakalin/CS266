@@ -22,7 +22,10 @@ describe('Unit test useAddProduct hook', () => {
   it('should allow admin to add a new product', async () => {
     const { result } = renderHook(() => useAddProduct());
 
-    axios.put.mockResolvedValue({ status: 201 });
+    axios.put.mockResolvedValue({
+      status: 201,
+      data: { message: 'Product added successfully' }
+    });
 
     await act(async () => {
       result.current.handleSubmit(mockEvent);
@@ -36,7 +39,9 @@ describe('Unit test useAddProduct hook', () => {
   it('should not allow admin to add a new product', async () => {
     const { result } = renderHook(() => useAddProduct());
 
-    axios.put.mockRejectedValue({ response: { status: 409 } });
+    axios.put.mockRejectedValue({ response: { status: 409 } ,data : {
+      message : 'Your product is already exists in the store'
+    }});
 
     await act(async () => {
       result.current.handleSubmit(mockEvent);
@@ -49,7 +54,9 @@ describe('Unit test useAddProduct hook', () => {
  it('should handle internal server error',async()=>{
     const { result } = renderHook(() => useAddProduct());
 
-    axios.put.mockRejectedValue({ response: { status: 500 } });
+    axios.put.mockRejectedValue({ response: { status: 500 }, data: {
+      message: 'Internal server error, please try again later'
+    } });
 
     await act(async () => {
       result.current.handleSubmit(mockEvent);
@@ -62,7 +69,9 @@ describe('Unit test useAddProduct hook', () => {
   it('should handle 400 bad request',async()=>{
     const { result } = renderHook(() => useAddProduct());
 
-    axios.put.mockRejectedValue({ response: { status: 400 } });
+    axios.put.mockRejectedValue({ response: { status: 400 },data:{
+      message: 'Something went wrong , please try again later'
+    } });
 
     await act(async () => {
       result.current.handleSubmit(mockEvent);
