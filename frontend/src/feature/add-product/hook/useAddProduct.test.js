@@ -58,4 +58,17 @@ describe('Unit test useAddProduct hook', () => {
     expect(axios.put).toHaveBeenCalledWith('/add-product',expect.anything())
     expect(result.current.error).toBe('Internal server error, please try again later');
   })
+
+  it('should handle 400 bad request',async()=>{
+    const { result } = renderHook(() => useAddProduct());
+
+    axios.put.mockRejectedValue({ response: { status: 400 } });
+
+    await act(async () => {
+      result.current.handleSubmit(mockEvent);
+    });
+
+    expect(axios.put).toHaveBeenCalledWith('/add-product',expect.anything())
+    expect(result.current.error).toBe('Something went wrong , please try again later');
+  })
 });

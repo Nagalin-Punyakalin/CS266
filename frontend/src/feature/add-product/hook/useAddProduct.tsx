@@ -25,6 +25,7 @@ export default function useAddProduct() {
             console.log(err)
             if(err.response.status === 409) setError('Your product is already exists in the store')
             if(err.response.status === 500) setError('Internal server error, please try again later')
+            if(err.response.status === 400) setError('Something went wrong , please try again later')
         })
     }
 
