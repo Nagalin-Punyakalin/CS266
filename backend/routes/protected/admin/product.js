@@ -7,7 +7,7 @@ const checkProductPayload = require('./middleware')
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, 'public/shop');
+        cb(null, 'public');
     },
     filename: function (req, file, cb) {
         const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
@@ -29,10 +29,10 @@ router.put('/add-product',upload.single('image'),checkProductPayload ,async (req
         const oldProduct = await Product.findOne({name : name})
 
         if(oldProduct) {
-        const testFiles = fs.readdirSync(path.join(__dirname, '../../../public/shop'));
+        const testFiles = fs.readdirSync(path.join(__dirname, '../../../public'));
             testFiles.forEach(file => {
                 if(file === fileName) {
-                    const filePath = path.join(path.join(__dirname, '../../../public/shop'), file);
+                    const filePath = path.join(path.join(__dirname, '../../../public'), file);
                     fs.unlinkSync(filePath);
                 }
             });

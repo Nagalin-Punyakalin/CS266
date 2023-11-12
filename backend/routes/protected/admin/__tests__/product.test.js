@@ -6,11 +6,11 @@ const Product = require('../../../../database/Product')
 
 jest.mock('../../../../database/Product')
 afterEach(() => {
-    const testFiles = fs.readdirSync(path.join(__dirname, '../../../../public/shop'));
+    const testFiles = fs.readdirSync(path.join(__dirname, '../../../../public'));
 
     testFiles.forEach(file => {
         if (file.startsWith('test')) {
-            const filePath = path.join(path.join(__dirname, '../../../../public/shop'), file);
+            const filePath = path.join(path.join(__dirname, '../../../../public'), file);
             fs.unlinkSync(filePath);
             console.log(`Deleted: ${filePath}`);
         }
