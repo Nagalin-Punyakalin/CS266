@@ -1,9 +1,9 @@
 const router = require('express').Router()
 const mongoose = require('mongoose');
 
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
-const Address = mongoose.model('Address', addressSchema);
+
+
 
 // API endpoint to add an address
 router.post('/addAddress', async (req, res) => {
