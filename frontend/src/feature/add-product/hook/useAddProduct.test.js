@@ -28,7 +28,7 @@ describe('Unit test useAddProduct hook', () => {
       result.current.handleSubmit(mockEvent);
     });
 
-    expect(axios.put).toHaveBeenCalledWith('/add-product',expect.anything())
+    expect(axios.put).toHaveBeenCalledWith('/admin/add-product',expect.anything())
     expect(Swal.fire).toHaveBeenCalledWith('Product added successfully', '', 'success');
     expect(result.current.error).toBe('');
   });
@@ -42,7 +42,7 @@ describe('Unit test useAddProduct hook', () => {
       result.current.handleSubmit(mockEvent);
     });
 
-    expect(axios.put).toHaveBeenCalledWith('/add-product',expect.anything())
+    expect(axios.put).toHaveBeenCalledWith('/admin/add-product',expect.anything())
     expect(result.current.error).toBe('Your product is already exists in the store');
   });
 
@@ -55,7 +55,7 @@ describe('Unit test useAddProduct hook', () => {
       result.current.handleSubmit(mockEvent);
     });
 
-    expect(axios.put).toHaveBeenCalledWith('/add-product',expect.anything())
+    expect(axios.put).toHaveBeenCalledWith('/admin/add-product',expect.anything())
     expect(result.current.error).toBe('Internal server error, please try again later');
   })
 
@@ -68,7 +68,7 @@ describe('Unit test useAddProduct hook', () => {
       result.current.handleSubmit(mockEvent);
     });
 
-    expect(axios.put).toHaveBeenCalledWith('/add-product',expect.anything())
+    expect(axios.put).toHaveBeenCalledWith('/admin/add-product',expect.anything())
     expect(result.current.error).toBe('Something went wrong , please try again later');
   })
 });
