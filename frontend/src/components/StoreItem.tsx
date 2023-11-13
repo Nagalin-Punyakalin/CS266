@@ -3,13 +3,13 @@ import { useShoppingCart } from "../context/ShoppingCartContext"
 import { formatCurrency } from "../utilities/formatCurrency"
 
 type StoreItemProps = {
-  id: number
+  id: string
   name: string
   price: number
-  imgUrl: string
+  imageName: string
 }
 
-export function StoreItem({ id, name, price, imgUrl }: StoreItemProps) {
+export function StoreItem({ id, name, price, imageName }: StoreItemProps) {
   const {
     getItemQuantity,
     increaseCartQuantity,
@@ -22,7 +22,7 @@ export function StoreItem({ id, name, price, imgUrl }: StoreItemProps) {
     <Card className="h-100">
       <Card.Img
         variant="top"
-        src={imgUrl}
+        src={`http://localhost:8000/${imageName}`}
         height="200px"
         style={{ objectFit: "cover" }}
       />
@@ -33,7 +33,7 @@ export function StoreItem({ id, name, price, imgUrl }: StoreItemProps) {
         </Card.Title>
         <div className="mt-auto">
           {quantity === 0 ? (
-            <Button className="w-100" onClick={() => increaseCartQuantity(id)}>
+            <Button className="w-100" onClick={() => increaseCartQuantity(id,name,price,imageName)}>
               + Add To Cart
             </Button>
           ) : (
@@ -49,7 +49,7 @@ export function StoreItem({ id, name, price, imgUrl }: StoreItemProps) {
                 <div>
                   <span className="fs-3">{quantity}</span> in cart
                 </div>
-                <Button onClick={() => increaseCartQuantity(id)}>+</Button>
+                <Button onClick={() => increaseCartQuantity(id,name,price,imageName)}>+</Button>
               </div>
               <Button
                 onClick={() => removeFromCart(id)}

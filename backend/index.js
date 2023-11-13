@@ -7,6 +7,7 @@ const router = require('./routes/')
 const PORT = process.env.PORT
 require('./database/database');
 
+app.use(express.static('public'));
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended : false}))
 app.use(cors({

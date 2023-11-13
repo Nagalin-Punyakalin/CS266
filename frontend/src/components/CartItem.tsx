@@ -4,24 +4,25 @@ import storeItems from "../data/items.json"
 import { formatCurrency } from "../utilities/formatCurrency"
 
 type CartItemProps = {
-  id: number
+  id: string
   quantity: number
+  name: string,
+  price: number
+  imageName: string
 }
 
-export function CartItem({ id, quantity }: CartItemProps) {
+export function CartItem({ id, quantity,name,imageName,price }: CartItemProps) {
   const { removeFromCart } = useShoppingCart()
-  const item = storeItems.find(i => i.id === id)
-  if (item == null) return null
-
+  
   return (
     <Stack direction="horizontal" gap={2} className="d-flex align-items-center">
       <img
-        src={item.imgUrl}
+         src={`http://localhost:8000/${imageName}`}
         style={{ width: "125px", height: "75px", objectFit: "cover" }}
       />
       <div className="me-auto">
         <div>
-          {item.name}{" "}
+          {name}{" "}
           {quantity > 1 && (
             <span className="text-muted" style={{ fontSize: ".65rem" }}>
               x{quantity}
@@ -29,14 +30,14 @@ export function CartItem({ id, quantity }: CartItemProps) {
           )}
         </div>
         <div className="text-muted" style={{ fontSize: ".75rem" }}>
-          {formatCurrency(item.price)}
+          {formatCurrency(price)}
         </div>
       </div>
-      <div> {formatCurrency(item.price * quantity)}</div>
+      <div> {formatCurrency(price * quantity)}</div>
       <Button
         variant="outline-danger"
         size="sm"
-        onClick={() => removeFromCart(item.id)}
+        onClick={() => removeFromCart(id)}
       >
         &times;
       </Button>

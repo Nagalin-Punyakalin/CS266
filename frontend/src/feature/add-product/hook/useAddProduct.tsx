@@ -22,8 +22,8 @@ export default function useAddProduct() {
             }
         })
         .catch(err=>{
-            console.log(err)
-            setError(err.data.message)
+            console.log(err.response.data.message)
+            setError(err.response.data.message)
         })
     }
 
