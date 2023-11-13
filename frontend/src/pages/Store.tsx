@@ -12,7 +12,7 @@ export function Store() {
 
  const data = useFetch({url : '/user/product'})  as Items[]
   
-  if(data == null) return
+  if(data == null) return null
 
   return (
     <>
