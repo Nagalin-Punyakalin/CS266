@@ -22,7 +22,7 @@ export default function useAddProduct() {
             }
         })
         .catch(err=>{
-            console.log(err)
+            console.log(err.response.data.message)
             setError(err.response.data.message)
         })
     }
