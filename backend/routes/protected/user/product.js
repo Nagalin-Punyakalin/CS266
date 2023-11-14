@@ -25,9 +25,28 @@ router.get('/product', async (req, res) => {
 
 router.put('/purchase',async(req,res)=>{
     const payload = req.body
+    payload.map(async currPayload=>{
+        const product = await Product.findById(currPayload.id)
+        if(product) {
+            const newPurchase = new Purchase({
+                quantity : currPayload.quantity,
+                status : 'Pending payment',
+                total : currPayload.total,
+                products : currPayload.id
+
+            })
+
+            await newPurchase.save()
+           return res.sendStatus(200)
+        }
+        res.sendStatus(404)
+        
+        
+    })
+    
    
 
-    payload.map(async currPayload=>{
+   /* payload.map(async currPayload=>{
         console.log(currPayload.id)
         const product = await Product.find()
         console.log(product)
@@ -44,7 +63,7 @@ router.put('/purchase',async(req,res)=>{
     })
     
    
-    res.status(404).end()
+    res.status(404).end()*/
 
    
 })
