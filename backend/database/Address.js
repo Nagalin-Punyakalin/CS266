@@ -1,12 +1,14 @@
 const mongoose = require('mongoose')
 
 const addressSchema = new mongoose.Schema({
-    houseAddress : String,
-    streetName: String,
-    city: String,
-    SubDistrict: String,
-    SubArea: String,
-    PostalCode : String,
+    houseNumber : String,
+    villgeNumber : String,
+    alley : String,
+    street : String,
+    subDistrict : String,
+    subArea : String,
+    province : String,
+    postalCode : String,
     phone : String
   });
 

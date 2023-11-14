@@ -11,7 +11,6 @@ export default function InformationForm() {
           <Form.Control
             type="text"
             placeholder="Enter your name"
-            // Add onChange handler if needed
           />
         </Form.Group>
 
@@ -20,27 +19,83 @@ export default function InformationForm() {
           <Form.Control
             type="text"
             placeholder="Enter your surname"
-            // Add onChange handler if needed
           />
         </Form.Group>
 
         <Form.Group controlId="formPhoneNumber" className="col-md-4">
           <Form.Label>Phone Number</Form.Label>
           <Form.Control
-            type="tel"
+            type="text"
             placeholder="Enter your phone number"
-            // Add onChange handler if needed
+            
           />
         </Form.Group>
       </div>
 
       <div className="mb-3 row">
-        <Form.Group controlId="formAddress" className="col-md-12">
-          <Form.Label>Address</Form.Label>
+        <Form.Group controlId="formHouseNumber" className="col-md-3">
+          <Form.Label>House Number</Form.Label>
           <Form.Control
-            as="textarea"
-            placeholder="Enter your address"
-            // Add onChange handler if needed
+            type="text"
+            placeholder="Enter your house number"
+          />
+        </Form.Group>
+
+        <Form.Group controlId="formVillage" className="col-md-3">
+          <Form.Label>Village</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Enter your village"
+          />
+        </Form.Group>
+
+        <Form.Group controlId="formAlley" className="col-md-3">
+          <Form.Label>Alley</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Enter your alley"
+          />
+        </Form.Group>
+
+        <Form.Group controlId="formStreet" className="col-md-3">
+          <Form.Label>Street</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Enter your street"
+          />
+        </Form.Group>
+      </div>
+
+      <div className="mb-3 row">
+        <Form.Group controlId="formSubDistric" className="col-md-3">
+          <Form.Label>Sub-Distric</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Enter your sub-distric"
+          />
+        </Form.Group>
+
+        <Form.Group controlId="formSubArea" className="col-md-3">
+          <Form.Label>Sub-Area</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Enter your sub-area"
+          />
+        </Form.Group>
+
+        <Form.Group controlId="formProvince" className="col-md-3">
+          <Form.Label>Province</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Enter your province"
+          />
+        </Form.Group>
+
+        <Form.Group controlId="formPostalCode" className="col-md-3">
+          <Form.Label>Postal Code</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Enter your postal code"
           />
         </Form.Group>
       </div>
