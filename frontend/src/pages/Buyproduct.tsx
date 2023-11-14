@@ -1,7 +1,7 @@
 import ProductCon from '../components/ProductCon';
 
 
-export function Buyproduct() {
+export function BuyProduct() {
   return (
   <>
     <ProductCon />

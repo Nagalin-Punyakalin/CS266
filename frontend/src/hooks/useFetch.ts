@@ -1,13 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import axios from '../lib/axios'
 
-interface useFetchProps {
-    url : string
-}
-
-export default function useFetch<T>({url } : useFetchProps) {
+export default function useFetch<T>(url : string,initialValue : T) :[T | null,string] {
     const [isLoading,setIsloading] = useState<boolean>(true)
-    const [data,setData] = useState([])
+    const [data,setData] = useState(initialValue)
     const [error,setError] = useState<string>('')
 
     useEffect(()=>{
@@ -23,7 +19,7 @@ export default function useFetch<T>({url } : useFetchProps) {
         })
     })
 
-    if(isLoading) return null
+    if(isLoading) return [null,error]
    
-    return data
+    return [data,error]
 }

@@ -1,23 +1,19 @@
-const router = require('express').Router()
+const router = require('express').Router();
 const mongoose = require('mongoose');
+const Address = require('../../../database/Address');
 
-
-
-
-
-// API endpoint to add an address
-router.post('/addAddress', async (req, res) => {
+router.post('/addressInput', async (req, res) => {
   try {
-    const { username, address, phone } = req.body;
+    const data = await Address.find();
+    
+    const mapData = data.map(addressInput => ({
+      id : addressInput._id,
+      username : addressInput.username,
+      address : addressInput.address,
+      phone : addressInput.phone
+  }));
+    res.status(200).json('Successfully added data', mapData);
 
-    const newAddress = new Address({
-      username,
-      address,
-      phone,
-    });
-
-    await newAddress.save();
-    res.status(200).json({ message: 'Address added successfully', address: newAddress });
   } catch (error) {
     console.error('Error adding address:', error);
     res.status(500).send('Internal Server Error');

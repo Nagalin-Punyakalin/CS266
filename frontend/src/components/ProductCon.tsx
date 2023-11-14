@@ -1,7 +1,13 @@
 import React from 'react';
 import { Button, Image, Table, Form } from 'react-bootstrap';
-
+import { useShoppingCart } from '../context/ShoppingCartContext';
+import { formatCurrency } from '../utilities/formatCurrency';
 export default function ProductCon() {
+  const {
+    cartItems,
+    getItemQuantity
+  } = useShoppingCart()
+
   const centerContentStyle: React.CSSProperties = {
     display: 'flex',
     flexDirection: 'column',
@@ -41,18 +47,29 @@ export default function ProductCon() {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td><Image src="holder.js/171x180" rounded /></td>
-              <td>Product #1</td>
-              <th>1</th>
-              <td>$9,999.00</td>
-            </tr>
+            {
+              cartItems.map((currItems,index)=>(
+                <tr>
+                <td>{++index}</td>
+                <td>{currItems.name}</td>
+                <th>{getItemQuantity(currItems.id)}</th>
+                <td>{formatCurrency(currItems.price)}</td>
+              </tr>
+              ))
+            }
+           
+            
           </tbody>
         </Table>
       </div>
 
       <div className="Total" style={rightAlignedStyle}>
-        <h4>Total $9,999.00</h4>
+        <h4>{formatCurrency(
+          cartItems.reduce((total,cartItem)=>{
+           const item = cartItems.find(i => i.id === cartItem.id)
+           return total + (item?.price || 0) * cartItem.quantity
+        },0))}
+        </h4>
       </div>
 
       <div className="Paymethod" style={Paymethod}>

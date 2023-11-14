@@ -3,6 +3,7 @@ import { useShoppingCart } from "../context/ShoppingCartContext"
 import { formatCurrency } from "../utilities/formatCurrency"
 import { CartItem } from "./CartItem"
 import {useEffect} from 'react'
+import { Link } from "react-router-dom"
 type ShoppingCartProps = {
   isOpen: boolean
 }
@@ -31,6 +32,9 @@ export function ShoppingCart({ isOpen }: ShoppingCartProps) {
               }, 0)
             )}
           </div>
+          <Link to="/buyproduct" className="btn btn-primary">
+        Check out
+      </Link>
         </Stack>
       </Offcanvas.Body>
     </Offcanvas>

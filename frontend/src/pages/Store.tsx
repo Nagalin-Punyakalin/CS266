@@ -10,7 +10,7 @@ export function Store() {
     imageName: string
   }
 
- const data = useFetch({url : '/user/product'})  as Items[]
+ const [data] = useFetch<Items[]>('user/product',[])
   
   if(data == null) return null
 

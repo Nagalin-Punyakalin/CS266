@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const Product = require('../../../database/Product')
+const Purchase = require('../../../database/Purchase')
 
 router.get('/product', async (req, res) => {
     try {
@@ -21,6 +22,51 @@ router.get('/product', async (req, res) => {
         res.status(500).json('Error occurs on the server side, please try again later');
     }
 });
+
+router.put('/purchase',async(req,res)=>{
+    const payload = req.body
+    payload.map(async currPayload=>{
+        const product = await Product.findById(currPayload.id)
+        if(product) {
+            const newPurchase = new Purchase({
+                quantity : currPayload.quantity,
+                status : 'Pending payment',
+                total : currPayload.total,
+                products : currPayload.id
+
+            })
+
+            await newPurchase.save()
+           return res.sendStatus(200)
+        }
+        res.sendStatus(404)
+        
+        
+    })
+    
+   
+
+   /* payload.map(async currPayload=>{
+        console.log(currPayload.id)
+        const product = await Product.find()
+        console.log(product)
+
+        if(product) {
+            const newPurchase = new Purchase({
+                quantity : payload.quantity,
+                total : payload.total,
+                product : product.id,
+                status : 'Pending payment'
+            })
+            return res.status(200).end()
+        }
+    })
+    
+   
+    res.status(404).end()*/
+
+   
+})
 
 
 module.exports = router
