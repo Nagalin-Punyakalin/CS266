@@ -1,8 +1,9 @@
 import Form from "../feature/add-product/component/Form"
 
-export function Home() {
+export function AddProduct() {
   return (
-  <>
-    </>)
-  
+    <>
+      <Form />
+    </>
+  );
 }
