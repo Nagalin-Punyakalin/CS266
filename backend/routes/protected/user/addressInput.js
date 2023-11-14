@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const mongoose = require('mongoose');
-const Address = require('../../../database/User');
+const Address = require('../../../database/Address');
 
 router.post('/addressInput', async (req, res) => {
   try {
