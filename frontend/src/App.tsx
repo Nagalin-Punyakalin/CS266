@@ -5,6 +5,7 @@ import { Store } from "./pages/Store"
 import { About } from "./pages/About"
 import { BuyProduct } from "./pages/Buyproduct"
 import { AddCustomerInfo } from "./pages/AddCustomerInfo"
+import { AddProduct } from "./pages/AddProduct"
 import { Navbar } from "./components/Navbar"
 import { ShoppingCartProvider } from "./context/ShoppingCartContext"
 
@@ -19,6 +20,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/buyproduct" element={<BuyProduct />} />
           <Route path="/addcustomerinfo" element={<AddCustomerInfo/>} />
+          <Route path="/AddProduct" element={<AddProduct/>} />
         </Routes>
       </Container>
     </ShoppingCartProvider>
