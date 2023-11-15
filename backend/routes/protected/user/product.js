@@ -2,6 +2,20 @@ const router = require('express').Router()
 const Product = require('../../../database/Product')
 const Purchase = require('../../../database/Purchase')
 
+/**
+ * @swagger
+ * /user/product:
+ *   get:
+ *     summary: all products data in database
+ *     description: fetch all the products in database
+ *     
+ *     responses:
+ *       '200':
+ *         description: OK
+ *       '500':
+ *         description: Internal server error, please try again later
+ */
+
 router.get('/product', async (req, res) => {
     try {
         const result = await Product.find();
@@ -12,7 +26,6 @@ router.get('/product', async (req, res) => {
             name: product.name,
             price: product.price,
             imageName: product.imageName,
-            // Include other fields if needed
         }));
 
         res.status(200).json(modifiedResult);
