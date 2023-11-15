@@ -19,7 +19,8 @@ router.get('/product', async (req, res) => {
 
     } catch (error) {
         console.error(error);
-        res.status(500).json('Error occurs on the server side, please try again later');
+        res.status(500)
+        .json({message : 'Unable to fetch data, please try again later'});
     }
 });
 
@@ -43,29 +44,6 @@ router.put('/purchase',async(req,res)=>{
         
         
     })
-    
-   
-
-   /* payload.map(async currPayload=>{
-        console.log(currPayload.id)
-        const product = await Product.find()
-        console.log(product)
-
-        if(product) {
-            const newPurchase = new Purchase({
-                quantity : payload.quantity,
-                total : payload.total,
-                product : product.id,
-                status : 'Pending payment'
-            })
-            return res.status(200).end()
-        }
-    })
-    
-   
-    res.status(404).end()*/
-
-   
 })
 
 

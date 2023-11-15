@@ -7,7 +7,7 @@ jest.mock('../../lib/axios');
 
 describe('Unit test useFetch hook', () => {
     it('should set the data properly', async () => {
-        /*axios.get.mockResolvedValue({
+        axios.get.mockResolvedValue({
             status: 200,
             data: {
                 name: 'name',
@@ -25,6 +25,6 @@ describe('Unit test useFetch hook', () => {
         });
 
         expect(axios.get).toHaveBeenCalledWith('/user/product');
-      */
+      
     });
 });
