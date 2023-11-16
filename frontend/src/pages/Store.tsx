@@ -1,4 +1,4 @@
-import { Col, Row } from "react-bootstrap"
+import { Col, Container, Row } from "react-bootstrap"
 import { StoreItem } from "../components/StoreItem"
 import useFetch from "../hooks/useFetch"
 
@@ -13,7 +13,7 @@ export function Store() {
  const [data,error] = useFetch<Items[]>('user/product',[])
   
   return (
-    <>
+    <Container className="mt-4">
      <h1>Store</h1>
      {error &&  <div className="alert alert-danger" >
                 {error}
@@ -25,6 +25,6 @@ export function Store() {
           </Col>
         ))}
         </Row> 
-    </>
+    </Container>
   )
 }

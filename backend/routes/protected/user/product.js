@@ -17,6 +17,7 @@ const Purchase = require('../../../database/Purchase')
  */
 
 router.get('/product', async (req, res) => {
+    console.log(req.headers.authorization)
     try {
         const result = await Product.find();
 

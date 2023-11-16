@@ -1,17 +1,34 @@
 import React, { FormEvent, useRef,useState } from 'react'
+import axios from '../../../lib/axios'
+import { useAuth } from '../../../context/AuthContext'
+import { useNavigate } from 'react-router-dom'
 
 export default function useLogin() {
+    const {
+        setIsAuthenticated,
+        setRole
+    } = useAuth()
+    const navigate = useNavigate()
     const username = useRef<HTMLInputElement>(null)
     const password = useRef<HTMLInputElement>(null)
     const [error,setError] = useState<string>('')
 
     const handleLogin = (e: FormEvent<HTMLFormElement>) : void=>{
         e.preventDefault()
-
-        //.catch(err=>{
-            //console.log(err.response.data.message)
-            //setError(err.response.data.message)
-        //})
+        axios.post('/login',{
+            username : username.current?.value,
+            password : password.current?.value
+        })
+        .then(response=>{
+            localStorage.setItem('jwt',JSON.stringify(response.data.token))
+            setIsAuthenticated(true)
+            setRole(response.data?.role)
+            navigate('/homepage')
+        })
+        .catch(err=>{
+            console.log(err)
+            setError(err.response.data.message)
+        })
     }
 
     
