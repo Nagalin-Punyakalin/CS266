@@ -12,7 +12,7 @@ export default function useFetch<T>(url : string,initialValue : T) :[T | null,st
             setData(response.data)
         })
         .catch(err=>{
-            setError(err.data.message)
+            setError(err.response.data.message)
         })
         .finally(()=>{
             setIsloading(false)
