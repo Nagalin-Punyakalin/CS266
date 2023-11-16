@@ -8,9 +8,12 @@ import { AddCustomerInfo } from "./pages/AddCustomerInfo"
 import { AddProduct } from "./pages/AddProduct"
 import { Navbar } from "./components/Navbar"
 import { ShoppingCartProvider } from "./context/ShoppingCartContext"
+import { AuthProvider } from "./context/AuthContext"
 
 function App() {
   return (
+    <AuthProvider>
+
     <ShoppingCartProvider>
       <Navbar />
       <Container className="mb-4">
@@ -24,6 +27,7 @@ function App() {
         </Routes>
       </Container>
     </ShoppingCartProvider>
+    </AuthProvider>
   )
 }
 

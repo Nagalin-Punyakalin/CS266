@@ -48,7 +48,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage })
 
 
-router.put('/add-product',upload.single('image'),checkProductPayload ,async (req, res) => {
+router.put('/product',upload.single('image'),checkProductPayload ,async (req, res) => {
     const {name,price} = req.body
     const fileName = req.file.filename
 
