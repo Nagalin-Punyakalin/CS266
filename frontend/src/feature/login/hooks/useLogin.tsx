@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom'
 
 export default function useLogin() {
     const {
-        setIsAuthenticated,
         setRole
     } = useAuth()
     const navigate = useNavigate()
@@ -21,7 +20,7 @@ export default function useLogin() {
         })
         .then(response=>{
             localStorage.setItem('jwt',JSON.stringify(response.data.token))
-            setIsAuthenticated(true)
+           
             setRole(response.data?.role)
             navigate('/homepage')
         })

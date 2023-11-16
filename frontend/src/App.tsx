@@ -10,6 +10,7 @@ import { Login } from "./pages/Login"
 import { Navbar } from "./components/Navbar"
 import { ShoppingCartProvider } from "./context/ShoppingCartContext"
 import { AuthProvider } from "./context/AuthContext"
+import Protected from "./components/Protected"
 
 function App() {
   return (
@@ -17,9 +18,9 @@ function App() {
       <ShoppingCartProvider>
         <Routes>
         <Route path="/" element={<Login />} />
-          <Route element={<Navbar />}>
+        <Route element={<Protected/>}>
 
-            
+          <Route element={<Navbar />}>
           <Route path="/homepage" element={<Home />} />
           <Route path="/store" element={<Store />} />
           <Route path="/about" element={<About />} />
@@ -27,6 +28,7 @@ function App() {
           <Route path="/addcustomerinfo" element={<AddCustomerInfo/>} />
           <Route path="/addproduct" element={<AddProduct/>} />
           </Route>
+        </Route>
         </Routes>
       </ShoppingCartProvider>
     </AuthProvider>

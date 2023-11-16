@@ -7,6 +7,8 @@ export function Navbar() {
   const { openCart, cartQuantity } = useShoppingCart()
   const { role } = useAuth()
 
+  
+
   return (
 
     <>
