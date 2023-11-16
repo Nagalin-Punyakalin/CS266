@@ -1,6 +1,7 @@
-import { Button, Card } from "react-bootstrap"
+import { Button, Card, useAccordionButton } from "react-bootstrap"
 import { useShoppingCart } from "../context/ShoppingCartContext"
 import { formatCurrency } from "../utilities/formatCurrency"
+import { useAuth } from "../context/AuthContext"
 
 type StoreItemProps = {
   id: string
@@ -16,6 +17,7 @@ export function StoreItem({ id, name, price, imageName }: StoreItemProps) {
     decreaseCartQuantity,
     removeFromCart,
   } = useShoppingCart()
+  const {role} = useAuth()
   const quantity = getItemQuantity(id)
 
   return (
@@ -31,7 +33,9 @@ export function StoreItem({ id, name, price, imageName }: StoreItemProps) {
           <span className="fs-2">{name}</span>
           <span className="ms-2 text-muted">{formatCurrency(price)}</span>
         </Card.Title>
-        <div className="mt-auto">
+        
+        {role === 'user' && (
+          <div className="mt-auto">
           {quantity === 0 ? (
             <Button className="w-100" onClick={() => increaseCartQuantity(id,name,price,imageName)}>
               + Add To Cart
@@ -61,6 +65,7 @@ export function StoreItem({ id, name, price, imageName }: StoreItemProps) {
             </div>
           )}
         </div>
+        )}
       </Card.Body>
     </Card>
   )

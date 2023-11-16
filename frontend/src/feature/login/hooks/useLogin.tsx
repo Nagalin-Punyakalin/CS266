@@ -22,7 +22,9 @@ export default function useLogin() {
             localStorage.setItem('jwt',JSON.stringify(response.data.token))
            
             setRole(response.data?.role)
-            navigate('/homepage')
+            if(response.data?.role === 'user') navigate('/homepage')
+            if(response.data?.role === 'admin') navigate('/my-store')
+            
         })
         .catch(err=>{
             console.log(err)

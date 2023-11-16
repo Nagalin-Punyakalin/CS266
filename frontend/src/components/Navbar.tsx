@@ -17,7 +17,7 @@ export function Navbar() {
         <Container>
           <Nav className="me-auto">
           {role === 'admin' &&
-              <Nav.Link to="/AddProduct" as={NavLink}>
+              <Nav.Link to="/store" as={NavLink}>
                 My store
               </Nav.Link>
             }
