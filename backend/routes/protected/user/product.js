@@ -2,6 +2,20 @@ const router = require('express').Router()
 const Product = require('../../../database/Product')
 const Purchase = require('../../../database/Purchase')
 
+/**
+ * @swagger
+ * /user/product:
+ *   get:
+ *     summary: all products data in database
+ *     description: fetch all the products in database
+ *     
+ *     responses:
+ *       '200':
+ *         description: OK
+ *       '500':
+ *         description: Internal server error, please try again later
+ */
+
 router.get('/product', async (req, res) => {
     try {
         const result = await Product.find();
@@ -12,41 +26,37 @@ router.get('/product', async (req, res) => {
             name: product.name,
             price: product.price,
             imageName: product.imageName,
-            // Include other fields if needed
         }));
 
         res.status(200).json(modifiedResult);
 
     } catch (error) {
         console.error(error);
-        res.status(500).json('Error occurs on the server side, please try again later');
+        res.status(500)
+        .json({message : 'Unable to fetch data, please try again later'});
     }
 });
 
 router.put('/purchase',async(req,res)=>{
     const payload = req.body
-   
-
     payload.map(async currPayload=>{
-        console.log(currPayload.id)
-        const product = await Product.find()
-        console.log(product)
-
+        const product = await Product.findById(currPayload.id)
         if(product) {
             const newPurchase = new Purchase({
-                quantity : payload.quantity,
-                total : payload.total,
-                product : product.id,
-                status : 'Pending payment'
-            })
-            return res.status(200).end()
-        }
-    })
-    
-   
-    res.status(404).end()
+                quantity : currPayload.quantity,
+                status : 'Pending payment',
+                total : currPayload.total,
+                products : currPayload.id
 
-   
+            })
+
+            await newPurchase.save()
+           return res.sendStatus(200)
+        }
+        res.sendStatus(404)
+        
+        
+    })
 })
 
 

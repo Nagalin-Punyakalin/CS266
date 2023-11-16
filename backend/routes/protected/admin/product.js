@@ -5,6 +5,33 @@ const fs = require('fs');
 const Product = require('../../../database/Product')
 const checkProductPayload = require('./middleware')
 
+/**
+ * @swagger
+ * /admin/add-product:
+ *   put:
+ *     summary: Add a new product if it not already exists
+ *     description: Endpoint to add a new product with image.
+ *     requestBody:
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *               price:
+ *                 type: number
+ *               image:
+ *                 type: string
+ *                 format: binary
+ *     responses:
+ *       '201':
+ *         description: Product added successfully
+ *       '409':
+ *         description: Product already exists in the store
+ *       '500':
+ *         description: Internal server error, please try again later
+ */
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, 'public');
@@ -21,7 +48,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage })
 
 
-router.put('/add-product',upload.single('image'),checkProductPayload ,async (req, res) => {
+router.put('/product',upload.single('image'),checkProductPayload ,async (req, res) => {
     const {name,price} = req.body
     const fileName = req.file.filename
 

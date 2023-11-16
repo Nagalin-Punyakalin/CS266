@@ -1,14 +1,13 @@
 const mongoose = require('mongoose');
 
-const purchase = new mongoose.Schema(
-    {
+const purchase = new mongoose.Schema({
         quantity : Number,
         status : String,
         total : Number,
-        products: [{
+        products: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Product'
-        }],
+        },
     });
 
-module.exports =  mongoose.model('Order', purchase);
+module.exports =  mongoose.model('Purchase', purchase);

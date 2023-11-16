@@ -15,7 +15,7 @@ export default function useAddProduct() {
         formData.append('price' , price.current?.value!)
         formData.append('image' , file!)
 
-        axios.put('/admin/add-product',formData)
+        axios.put('/admin/product',formData)
         .then(response=>{
             if(response.status === 201) {
                 Swal.fire(response.data.message, '', 'success')

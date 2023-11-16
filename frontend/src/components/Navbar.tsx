@@ -1,11 +1,18 @@
 import { Button, Container, Nav, Navbar as NavbarBs } from "react-bootstrap"
 import { NavLink } from "react-router-dom"
 import { useShoppingCart } from "../context/ShoppingCartContext"
-
+import { useAuth } from "../context/AuthContext"
+import { useEffect } from "react"
 export function Navbar() {
   const { openCart, cartQuantity } = useShoppingCart()
+  const {isAuthenticated} = useAuth()
+  useEffect(()=>{
+    console.log(isAuthenticated)
+  })
   return (
+    
     <NavbarBs sticky="top" className="bg-white shadow-sm mb-3">
+      {}
       <Container>
         <Nav className="me-auto">
           <Nav.Link to="/" as={NavLink}>
