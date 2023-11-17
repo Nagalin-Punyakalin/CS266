@@ -16,7 +16,6 @@ export default function InformationForm() {
     subAreaRef,
     provinceRef,
     postalCodeRef,
-    emailRef,
     error,
     storeSubmit
   } = AddUserData()
