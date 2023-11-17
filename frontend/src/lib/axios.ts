@@ -4,7 +4,7 @@ const axiosInstance = axios.create({
     baseURL : 'http://localhost:8000'
 })
 
-axios.interceptors.request.use(config=>{
+axiosInstance.interceptors.request.use(config=>{
     const jwtToken = JSON.parse(localStorage.getItem('jwt')!) 
     config.headers.authorization = `Bearer ${jwtToken}`
     return config

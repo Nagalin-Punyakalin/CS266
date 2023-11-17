@@ -17,7 +17,7 @@ export default function useFetch<T>(url : string,initialValue : T) :[T | null,st
         .finally(()=>{
             setIsloading(false)
         })
-    })
+    },[url])
 
     if(isLoading) return [null,error]
    

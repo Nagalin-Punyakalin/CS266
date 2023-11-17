@@ -1,9 +1,8 @@
 import React, { createContext, useContext, useState, ReactNode, SetStateAction, Dispatch } from 'react';
+import { useLocalStorage } from '../hooks/useLocalStorage';
 
 interface AuthContextProps {
-  isAuthenticated: boolean;
   role: string;
-  setIsAuthenticated: Dispatch<SetStateAction<boolean>>;
   setRole: Dispatch<SetStateAction<string>>;
 }
 
@@ -17,14 +16,11 @@ export function useAuth() {
     return useContext(AuthContext)
   }
 export function AuthProvider({ children }: AuthProviderProps) {
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
-  const [role, setRole] = useState<string>('');
+  const [role, setRole] = useLocalStorage<string>('role','');
 
   return (
     <AuthContext.Provider value={{
-      isAuthenticated,
       role,
-      setIsAuthenticated,
       setRole,
     }}>
       {children}

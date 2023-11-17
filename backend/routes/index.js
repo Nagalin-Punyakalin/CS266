@@ -30,7 +30,11 @@ router.post('/login', async (req, res) => {
     res.status(401).json({ message: 'Invalid username or password' });
 }); 
 
-router.use(isAuthenticated)
+
+//router.use(isAuthenticated)
+router.get('/checkauth',(req,res)=>{
+    res.sendStatus(200)
+})
 router.use('/admin', admin);
 router.use('/user', user);
 

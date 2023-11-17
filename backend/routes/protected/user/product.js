@@ -37,27 +37,28 @@ router.get('/product', async (req, res) => {
     }
 });
 
-router.put('/purchase',async(req,res)=>{
-    const payload = req.body
-    payload.map(async currPayload=>{
-        const product = await Product.findById(currPayload.id)
-        if(product) {
-            const newPurchase = new Purchase({
-                quantity : currPayload.quantity,
-                status : 'Pending payment',
-                total : currPayload.total,
-                products : currPayload.id
-
-            })
-
-            await newPurchase.save()
-           return res.sendStatus(200)
+router.put('/purchase', async (req, res) => {
+    const payload = req.body;
+    
+    try {
+        for (const currPayload of payload) {
+                const newPurchase = new Purchase({
+                    quantity: currPayload.quantity,
+                    status: 'รอชำระเงิน',
+                    total: currPayload.total,
+                    products: currPayload.id,
+                })
+                await newPurchase.save();
+            } 
+            res.status(201).json({ message: 'Your orders have been confirmed' });
         }
-        res.sendStatus(404)
-        
-        
-    })
-})
+
+    catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal server error, please try again later' });
+    }
+});
+
 
 
 module.exports = router

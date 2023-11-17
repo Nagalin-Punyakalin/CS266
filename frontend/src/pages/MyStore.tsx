@@ -2,7 +2,7 @@ import { Col, Container, Row } from "react-bootstrap"
 import { StoreItem } from "../components/StoreItem"
 import useFetch from "../hooks/useFetch"
 
-export function Store() {
+export function MyStore() {
   interface Items {
     id: string;
     name: string;

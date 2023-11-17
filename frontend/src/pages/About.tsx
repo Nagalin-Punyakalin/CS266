@@ -1,3 +1,11 @@
+import { Container } from "react-bootstrap"
+
 export function About() {
-  return <h1>About</h1>
+  return (
+  <Container>
+    
+  <h1>About</h1>
+  </Container>
+
+  )
 }

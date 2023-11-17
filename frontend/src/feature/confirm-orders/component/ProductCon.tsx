@@ -1,12 +1,18 @@
 import React from 'react';
 import { Button, Image, Table, Form } from 'react-bootstrap';
-import { useShoppingCart } from '../context/ShoppingCartContext';
-import { formatCurrency } from '../utilities/formatCurrency';
+import { useShoppingCart } from '../../../context/ShoppingCartContext';
+import { formatCurrency } from '../../../utilities/formatCurrency';
+import Swal from 'sweetalert2';
+import useConfirmOrder from '../hook/useConfirmOrder';
 export default function ProductCon() {
   const {
     cartItems,
     getItemQuantity
   } = useShoppingCart()
+
+  const {
+    handleOrder
+  } = useConfirmOrder()
 
   const centerContentStyle: React.CSSProperties = {
     display: 'flex',
@@ -101,7 +107,20 @@ export default function ProductCon() {
       </div>
 
       <div className="Button" style={flexContainerStyle}>
-        <Button variant="primary" type="submit" className="mx-2">
+        <Button onClick={()=>{
+          Swal.fire({
+            title: "Are you sure you want to confirm this order?",
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes!"
+          }).then((result) => {
+            if (result.isConfirmed) {
+              handleOrder()
+            }
+          });
+        }} variant="primary" type="submit" className="mx-2">
           Order
         </Button>
         <Button variant="danger" type="submit" className="mx-2">
