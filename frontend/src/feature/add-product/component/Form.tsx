@@ -31,16 +31,21 @@ export default function Form() {
         <FormAddPro.Control required type="file" onChange={handleFileChange} />
         </FormAddPro.Group>
         <p />
-        <div className="text-center">
-        <Button variant="primary" type="submit">
-          Submit
-        </Button>
-        </div>
+        <div className="d-flex flex-column align-items-center ">
         { error && 
-          <div className="alert alert-danger" >
+          <div className="alert alert-danger mt-4" >
                 {error}
           </div>
         }
+        <div className="text-center">
+       
+        <Button  variant="primary" type="submit">
+          Submit
+        </Button>
+        </div>
+        </div>
+       
+        
     </form>
   )
 }
