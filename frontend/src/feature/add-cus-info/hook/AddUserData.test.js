@@ -31,7 +31,7 @@ describe('Unit test AddAddress hook', () => {
       result.current.handleSubmit(mockEvent);
     });
 
-    expect(axios.put).toHaveBeenCalledWith('/user/add-cus-info',expect.anything())
+    expect(axios.put).toHaveBeenCalledWith('/user/address',expect.anything())
     expect(Swal.fire).toHaveBeenCalledWith('Address added successfully', '', 'success');
     expect(result.current.error).toBe('');
   });
@@ -52,7 +52,7 @@ describe('Unit test AddAddress hook', () => {
       result.current.handleSubmit(mockEvent);
     });
 
-    expect(axios.put).toHaveBeenCalledWith('/user/add-cus-info',expect.anything())
+    expect(axios.put).toHaveBeenCalledWith('/user/address',expect.anything())
     expect(result.current.error).toBe('Internal server error, please try again later');
   })
 
@@ -72,7 +72,7 @@ describe('Unit test AddAddress hook', () => {
       result.current.handleSubmit(mockEvent);
     });
 
-    expect(axios.put).toHaveBeenCalledWith('/user/add-cus-info',expect.anything())
+    expect(axios.put).toHaveBeenCalledWith('/user/address',expect.anything())
     expect(result.current.error).toBe('Something went wrong , please try again later');
   })
 });
