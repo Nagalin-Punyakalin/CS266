@@ -1,6 +1,6 @@
 const request = require('supertest');
-const server = require('../../../../index');
-const Account = require('../../../../database/Address')
+const server = require('../index');
+const Account = require('../database/Address')
 const bcrypt = require('bcryptjs')
 jest.mock('../../../../database/Address')
 
