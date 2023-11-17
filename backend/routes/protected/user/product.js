@@ -67,7 +67,7 @@ router.put('/purchase', async (req, res) => {
         for (const currPayload of payload) {
                 const newPurchase = new Purchase({
                     quantity: currPayload.quantity,
-                    status: 'รอชำระเงิน',
+                    status: 'Pending payment',
                     total: currPayload.total,
                     products: currPayload.id,
                 })
