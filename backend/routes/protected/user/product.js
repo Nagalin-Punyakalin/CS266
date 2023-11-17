@@ -53,10 +53,10 @@ router.get('/order', async (req, res) => {
             return modifiedPurchase;
         });
 
-        res.json(modifiedPurchases);
+        res.status(200).json(modifiedPurchases);
     } catch (error) {
         console.error(error);
-        res.status(500).send('Internal Server Error');
+        res.status(500).json({message : 'Internal Server Error, please try again leter'});
     }
 });
 
