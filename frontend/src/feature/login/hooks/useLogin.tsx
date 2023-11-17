@@ -23,7 +23,7 @@ export default function useLogin() {
            
             setRole(response.data?.role)
             if(response.data?.role === 'user') navigate('/homepage')
-            if(response.data?.role === 'admin') navigate('/my-store')
+            if(response.data?.role === 'admin') navigate('/store')
             
         })
         .catch(err=>{

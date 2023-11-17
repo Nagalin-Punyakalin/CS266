@@ -1,14 +1,31 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
+import AddUserData from '../hook/AddUserData'
 import Form from 'react-bootstrap/Form';
 
 export default function InformationForm() {
+  const {
+    nameRef,
+    surnameRef,
+    phoneRef,
+    houseNumberRef,
+    villageRef,
+    alleyRef,
+    streetRef,
+    subDistricRef,
+    subAreaRef,
+    provinceRef,
+    postalCodeRef,
+    error,
+    storeSubmit
+  } = AddUserData()
   return (
     <Form>
       <div className="mb-3 row">
         <Form.Group controlId="formName" className="col-md-4">
           <Form.Label>Name</Form.Label>
           <Form.Control
+            ref = {nameRef}
             type="text"
             placeholder="Enter your name"
           />
@@ -17,6 +34,7 @@ export default function InformationForm() {
         <Form.Group controlId="formSurname" className="col-md-4">
           <Form.Label>Surname</Form.Label>
           <Form.Control
+            ref = {surnameRef}
             type="text"
             placeholder="Enter your surname"
           />
@@ -25,6 +43,7 @@ export default function InformationForm() {
         <Form.Group controlId="formPhoneNumber" className="col-md-4">
           <Form.Label>Phone Number</Form.Label>
           <Form.Control
+            ref = {phoneRef}
             type="text"
             placeholder="Enter your phone number"
             
@@ -36,6 +55,7 @@ export default function InformationForm() {
         <Form.Group controlId="formHouseNumber" className="col-md-3">
           <Form.Label>House Number</Form.Label>
           <Form.Control
+            ref = {houseNumberRef}
             type="text"
             placeholder="Enter your house number"
           />
@@ -44,6 +64,7 @@ export default function InformationForm() {
         <Form.Group controlId="formVillage" className="col-md-3">
           <Form.Label>Village</Form.Label>
           <Form.Control
+            ref = {villageRef}
             type="text"
             placeholder="Enter your village"
           />
@@ -52,6 +73,7 @@ export default function InformationForm() {
         <Form.Group controlId="formAlley" className="col-md-3">
           <Form.Label>Alley</Form.Label>
           <Form.Control
+            ref = {alleyRef}
             type="text"
             placeholder="Enter your alley"
           />
@@ -60,6 +82,7 @@ export default function InformationForm() {
         <Form.Group controlId="formStreet" className="col-md-3">
           <Form.Label>Street</Form.Label>
           <Form.Control
+            ref = {streetRef}
             type="text"
             placeholder="Enter your street"
           />
@@ -70,6 +93,7 @@ export default function InformationForm() {
         <Form.Group controlId="formSubDistric" className="col-md-3">
           <Form.Label>Sub-Distric</Form.Label>
           <Form.Control
+            ref = {subDistricRef}
             type="text"
             placeholder="Enter your sub-distric"
           />
@@ -78,6 +102,7 @@ export default function InformationForm() {
         <Form.Group controlId="formSubArea" className="col-md-3">
           <Form.Label>Sub-Area</Form.Label>
           <Form.Control
+            ref = {subAreaRef}
             type="text"
             placeholder="Enter your sub-area"
           />
@@ -86,6 +111,7 @@ export default function InformationForm() {
         <Form.Group controlId="formProvince" className="col-md-3">
           <Form.Label>Province</Form.Label>
           <Form.Control
+            ref = {provinceRef}
             type="text"
             placeholder="Enter your province"
           />
@@ -94,6 +120,7 @@ export default function InformationForm() {
         <Form.Group controlId="formPostalCode" className="col-md-3">
           <Form.Label>Postal Code</Form.Label>
           <Form.Control
+            ref = {postalCodeRef}
             type="text"
             placeholder="Enter your postal code"
           />

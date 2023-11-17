@@ -8,6 +8,7 @@ const isAuthenticated = require('./middleware');
 require('dotenv').config();
 
 router.post('/login', async (req, res) => {
+    console.log(req.body)
     const username = req.body.username;
     const password = req.body.password;
 
@@ -18,6 +19,7 @@ router.post('/login', async (req, res) => {
         if (account && (await bcrypt.compare(password, account?.password))) {
             const payload = { username: account.username, role: account.role }; 
             const token = jwt.sign(payload, process.env.SECRET_KEY);
+            console.log(token)
             return res.status(200).json({ token: token,role: account.role});
         }
     } catch (err) {
@@ -31,7 +33,7 @@ router.post('/login', async (req, res) => {
 }); 
 
 
-//router.use(isAuthenticated)
+router.use(isAuthenticated)
 router.get('/checkauth',(req,res)=>{
     res.sendStatus(200)
 })
