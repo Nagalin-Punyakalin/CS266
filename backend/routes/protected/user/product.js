@@ -17,7 +17,6 @@ const Purchase = require('../../../database/Purchase')
  */
 
 router.get('/product', async (req, res) => {
-    console.log(req.headers.authorization)
     try {
         const result = await Product.find();
 
@@ -40,29 +39,21 @@ router.get('/product', async (req, res) => {
 
 router.put('/purchase', async (req, res) => {
     const payload = req.body;
-    console.log(payload);
-
+    
     try {
         for (const currPayload of payload) {
-            const product = await Product.findById(currPayload.id);
-
-            if (product) {
                 const newPurchase = new Purchase({
                     quantity: currPayload.quantity,
                     status: 'รอชำระเงิน',
                     total: currPayload.total,
                     products: currPayload.id,
-                });
-
+                })
                 await newPurchase.save();
-            } else {
-                return res.status(404).json({ message: 'Product not found' });
-            }
+            } 
+            res.status(201).json({ message: 'Your orders have been confirmed' });
         }
 
-        res.status(200).json({ message: 'Your orders have been confirmed' });
-
-    } catch (error) {
+    catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Internal server error, please try again later' });
     }

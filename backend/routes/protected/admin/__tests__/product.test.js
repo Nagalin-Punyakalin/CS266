@@ -1,5 +1,5 @@
 const request = require('supertest');
-const app = require('../../../../index');
+const server = require('../../../../index');
 const path = require('path')
 const fs = require('fs');
 const Product = require('../../../../database/Product')
@@ -18,11 +18,14 @@ afterEach(() => {
     });
 });
 
-describe('Unit test for adding a new product', () => {
+afterEach(()=>{
+    server.close()
+})
+describe("Unit test for admin's product endpoint", () => {
     
     it('should send a status code of 201 when adding a new product', async () => {
       Product.findOne.mockImplementationOnce(()=>null)
-        const response = await request(app)
+        const response = await request(server)
             .put('/admin/product')
             .set('authorization', `Bearer ${token}`)
             .field('name', 'demo')
@@ -36,9 +39,9 @@ describe('Unit test for adding a new product', () => {
         Product.findOne.mockImplementationOnce(()=>({
             name: "conflict",
             price: 30,
-            imageUrl:"path"
+            imageName:"path"
         }))
-          const response = await request(app)
+          const response = await request(server)
               .put('/admin/product')
               .set('authorization', `Bearer ${token}`)
               .field('name', 'conflict')
@@ -53,7 +56,7 @@ describe('Unit test for adding a new product', () => {
             throw new Error('MongoDB error');
         });
         
-          const response = await request(app)
+          const response = await request(server)
               .put('/admin/product')
               .set('authorization', `Bearer ${token}`)
               .field('name', 'demo')
@@ -63,7 +66,7 @@ describe('Unit test for adding a new product', () => {
       });
 
      it('should send a status code of 400 when the data is incomplete',async()=>{
-        const response = await request(app)
+        const response = await request(server)
               .put('/admin/product')
               .set('authorization', 'Bearer ' + token)
 

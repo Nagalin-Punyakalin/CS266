@@ -7,7 +7,8 @@ require('dotenv').config()
 const app = express()
 const router = require('./routes/')
 const PORT = process.env.PORT
-require('./database/database');
+require('./database/database')
+require('dotenv').config()
 
 const options = {
     definition: {
@@ -36,6 +37,6 @@ app.use(cors({
 app.use('/api-docs',swaggerUI.serve,swaggerUI.setup(specs))
 app.use(router)
 
-app.listen(PORT,()=>console.log(`Listening on port ${PORT}`))
+const server = app.listen(PORT,()=>console.log(`Listening on port ${PORT}`))
 
-module.exports = app
+module.exports = server

@@ -10,7 +10,6 @@ const option = {
 }
 passport.use('jwt',new jwtStrategy(option, async(payload, done) => {
     try {
-        console.log(payload)
         const user = await Account.findOne({username: payload.username})
         if(user) return done(null,user.username)
         return done(null,false)
