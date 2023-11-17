@@ -7,7 +7,7 @@ const checkProductPayload = require('./middleware')
 
 /**
  * @swagger
- * /admin/add-product:
+ * /admin/product:
  *   put:
  *     summary: Add a new product if it not already exists
  *     description: Endpoint to add a new product with image.

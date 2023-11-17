@@ -2,7 +2,7 @@ const passport = require("../passport/passport-config");
 const Account = require('../database/Account')
 
 function isAuthenticated(req, res, next) {
-    console.log(req.headers)
+console.log(req.headers)
     const token = req.headers.authorization;
     if (!token) {
         return res.status(401).json({ message: 'Unauthorized - Token missing' });

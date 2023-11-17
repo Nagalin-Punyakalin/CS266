@@ -1,5 +1,5 @@
 import { Container } from 'react-bootstrap';
-import ProductCon from '../components/ProductCon';
+import ProductCon from '../feature/confirm-orders/component/ProductCon';
 
 
 export function BuyProduct() {

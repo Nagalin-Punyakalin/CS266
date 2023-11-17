@@ -38,27 +38,36 @@ router.get('/product', async (req, res) => {
     }
 });
 
-router.put('/purchase',async(req,res)=>{
-    const payload = req.body
-    payload.map(async currPayload=>{
-        const product = await Product.findById(currPayload.id)
-        if(product) {
-            const newPurchase = new Purchase({
-                quantity : currPayload.quantity,
-                status : 'Pending payment',
-                total : currPayload.total,
-                products : currPayload.id
+router.put('/purchase', async (req, res) => {
+    const payload = req.body;
+    console.log(payload);
 
-            })
+    try {
+        for (const currPayload of payload) {
+            const product = await Product.findById(currPayload.id);
 
-            await newPurchase.save()
-           return res.sendStatus(200)
+            if (product) {
+                const newPurchase = new Purchase({
+                    quantity: currPayload.quantity,
+                    status: 'รอชำระเงิน',
+                    total: currPayload.total,
+                    products: currPayload.id,
+                });
+
+                await newPurchase.save();
+            } else {
+                return res.status(404).json({ message: 'Product not found' });
+            }
         }
-        res.sendStatus(404)
-        
-        
-    })
-})
+
+        res.status(200).json({ message: 'Your orders have been confirmed' });
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Unable to process your request, please try again later' });
+    }
+});
+
 
 
 module.exports = router

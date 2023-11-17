@@ -10,7 +10,6 @@ import { Login } from "./pages/Login"
 import { Navbar } from "./components/Navbar"
 import { ShoppingCartProvider } from "./context/ShoppingCartContext"
 import { AuthProvider } from "./context/AuthContext"
-import { MyStore } from "./pages/MyStore"
 import Protected from "./components/Protected"
 
 function App() {

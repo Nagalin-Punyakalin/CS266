@@ -18,6 +18,7 @@ type ShoppingCartContext = {
   openCart: () => void
   closeCart: () => void
   getItemQuantity: (id: string) => number
+  getItemTotal: (id: string) => number
   increaseCartQuantity:  (id: string,name : string,price : number,imageName : string) => void
   decreaseCartQuantity: (id: string) => void
   removeFromCart: (id: string) => void
@@ -83,10 +84,16 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
     })
   }
 
+  function getItemTotal(id: string) {
+    const price =  cartItems.find(item => item.id === id)?.price || 0
+    return price * getItemQuantity(id)
+  }
+
   return (
     <ShoppingCartContext.Provider
       value={{
         getItemQuantity,
+        getItemTotal,
         increaseCartQuantity,
         decreaseCartQuantity,
         removeFromCart,
