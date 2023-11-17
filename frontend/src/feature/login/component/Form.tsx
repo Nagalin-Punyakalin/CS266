@@ -3,7 +3,7 @@ import { Form, Button, Col } from 'react-bootstrap';
 import useLogin from '../hooks/useLogin';
 
 const containerStyle = {
-    height: '520px',
+    height: '540px',
     width: '400px',
     backgroundColor: '#ffffff',
     backgroundOpacity: '0.13',
@@ -29,13 +29,18 @@ const containerStyle = {
 };
 
 const buttonStyle = {
-    marginTop: '50px',
+    marginTop: '80px',
     width: '100%',
     padding: '15px 0',
     fontSize: '18px',
     fontWeight: '600',
     borderRadius: '5px',
 };
+
+const errorStyle = {
+    width: '325px',
+    marginTop: '10px',
+}
 
 export default function LoginForm() {
 
@@ -83,6 +88,13 @@ export default function LoginForm() {
                     />
                 </Form.Group>
 
+                { error && 
+                <div className="position-absolute start-50 translate-middle-x text-center alert alert-danger"
+                style={errorStyle}>
+                    {error}
+                </div>
+                }
+
                 <Form.Group>
                     <Col className="d-flex justify-content-center mt-3">
                         <Button 
@@ -93,12 +105,8 @@ export default function LoginForm() {
                         </Button>
                     </Col>
                 </Form.Group>
+
             </Form>
-            { error && 
-                <div className="alert alert-danger" >
-                    {error}
-                </div>
-        }
         </div>
     )
 }
