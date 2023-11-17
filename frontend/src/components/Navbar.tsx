@@ -1,13 +1,12 @@
 import { Button, Container, Nav, Navbar as NavbarBs } from "react-bootstrap"
-import { NavLink, Outlet } from "react-router-dom"
+import { NavLink, Outlet, useNavigate } from "react-router-dom"
 import { useShoppingCart } from "../context/ShoppingCartContext"
 import { useAuth } from "../context/AuthContext"
 import { useEffect } from "react"
 export function Navbar() {
   const { openCart, cartQuantity } = useShoppingCart()
   const { role } = useAuth()
-
-  
+  const navigate = useNavigate()
 
   return (
 
@@ -43,6 +42,7 @@ export function Navbar() {
            
 
           </Nav>
+          
           {cartQuantity > 0 && role ==='user' &&(
             <Button
               onClick={openCart}
@@ -73,7 +73,18 @@ export function Navbar() {
                 {cartQuantity}
               </div>
             </Button>
+            
           )}
+          <button
+              onClick={() => {
+                localStorage.removeItem('jwt');
+                navigate('/')
+              }}
+              className="btn"
+              style={{ marginRight: '-100px' }}
+          >
+              Logout
+            </button>
         </Container>
 
       </NavbarBs>
