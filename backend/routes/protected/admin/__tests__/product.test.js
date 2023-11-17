@@ -33,6 +33,7 @@ describe("Unit test for admin's product endpoint", () => {
             .attach('image', path.join(__dirname,'test.jpg'));
 
         expect(response.status).toBe(201);
+        expect(response.body.message).toBe('Product added successfully')
     });
 
     it('should send a status code of 409 when adding an existing product', async () => {
@@ -49,6 +50,7 @@ describe("Unit test for admin's product endpoint", () => {
               .attach('image', path.join(__dirname,'test.jpg'));
   
           expect(response.status).toBe(409);
+          expect(response.body.message).toBe('Your product is already exists in the store')
       });
 
       it('should send a status code of 500 when error occur', async () => {
@@ -62,7 +64,9 @@ describe("Unit test for admin's product endpoint", () => {
               .field('name', 'demo')
               .field('price', 20)
               .attach('image', path.join(__dirname,'test.jpg'));
+
           expect(response.status).toBe(500);
+          expect(response.body.message).toBe('Internal server error, please try again later')
       });
 
      it('should send a status code of 400 when the data is incomplete',async()=>{
@@ -71,5 +75,6 @@ describe("Unit test for admin's product endpoint", () => {
               .set('authorization', 'Bearer ' + token)
 
         expect(response.status).toBe(400)
+        expect(response.body.message).toBe('Something went wrong , please try again later')
       })
 });

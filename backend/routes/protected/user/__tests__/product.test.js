@@ -10,18 +10,31 @@ describe("Unit test for get /user/product endpoint", () => {
         server.close()
     })
     it('should fetch all the product in database', async () => {
-      Product.find.mockImplementationOnce(()=>([{
-        name: 'product1',
-        price: 20,
-        imageName: 'image'
-      }]))
-        const response = await request(server)
-            .get('/user/product')
-            .set('authorization', `Bearer ${token}`)
-            
-
-        expect(response.status).toBe(200);
-    });
+      // Mocking the Product.find method
+      Product.find.mockImplementationOnce(() => ([{
+          _id: 'id',
+          name: 'product1',
+          price: 20,
+          imageName: 'image'
+      }]));
+  
+      // Making a request to the endpoint
+      const response = await request(server)
+          .get('/user/product')
+          .set('authorization', `Bearer ${token}`);
+  
+      // Expecting a 200 status code
+      expect(response.status).toBe(200);
+  
+      // Parsing the response body as JSON
+      console.log(response.body)
+     expect(response.body).toEqual([{
+      id: expect.any(String),
+       name: 'product1', 
+       price: 20, 
+       imageName: 'image' 
+     }])
+  });
 
     it('should handle internal error for fethcing product', async () => {
         Product.find.mockImplementationOnce(()=>{
@@ -30,7 +43,9 @@ describe("Unit test for get /user/product endpoint", () => {
           const response = await request(server)
               .get('/user/product')
               .set('authorization', `Bearer ${token}`)
+
           expect(response.status).toBe(500);
+          expect(response.body.message).toBe('Unable to fetch data, please try again later')
       });
 });
 
