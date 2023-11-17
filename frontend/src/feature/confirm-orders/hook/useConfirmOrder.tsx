@@ -3,7 +3,7 @@ import { useShoppingCart } from '../../../context/ShoppingCartContext'
 import axios from '../../../lib/axios'
 import Swal from 'sweetalert2'
 export default function useConfirmOrder() {
-    const {cartItems,getItemQuantity,getItemTotal} = useShoppingCart()
+    const {cartItems,getItemTotal} = useShoppingCart()
   const handleOrder = ()=>{
     const order = cartItems.map(currItem=>{
         return {
@@ -18,7 +18,7 @@ export default function useConfirmOrder() {
         Swal.fire(response.data.message, '', 'success')
     })
     .catch(err=>{
-        Swal.fire(err.response.data.message, '', 'success')
+        Swal.fire(err.response.data.message, '', 'error')
         console.log(err)
     })
   }

@@ -64,7 +64,7 @@ router.put('/purchase', async (req, res) => {
 
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: 'Unable to process your request, please try again later' });
+        res.status(500).json({ message: 'Internal server error, please try again later' });
     }
 });
 
