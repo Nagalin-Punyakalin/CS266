@@ -8,6 +8,7 @@ const isAuthenticated = require('./middleware');
 require('dotenv').config();
 
 router.post('/login', async (req, res) => {
+    console.log(req.body)
     const username = req.body.username;
     const password = req.body.password;
 
@@ -31,7 +32,7 @@ router.post('/login', async (req, res) => {
 }); 
 
 
-//router.use(isAuthenticated)
+router.use(isAuthenticated)
 router.get('/checkauth',(req,res)=>{
     res.sendStatus(200)
 })

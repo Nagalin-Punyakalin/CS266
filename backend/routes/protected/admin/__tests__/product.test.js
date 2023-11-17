@@ -21,7 +21,7 @@ afterEach(() => {
 afterEach(()=>{
     server.close()
 })
-describe("Unit test for user's product endpoint", () => {
+describe("Unit test for admin's product endpoint", () => {
     
     it('should send a status code of 201 when adding a new product', async () => {
       Product.findOne.mockImplementationOnce(()=>null)

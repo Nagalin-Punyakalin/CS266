@@ -4,6 +4,7 @@ const Product = require('../../../../database/Product')
 const Purchase = require('../../../../database/Purchase')
 jest.mock('../../../../database/Product')
 
+const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIiLCJyb2xlIjoidXNlciIsImlhdCI6MTcwMDE2MTI4MH0.lgHTAj_hx6MuWNXhdxVAFZvVX63MZHY7dg9WC57unkY'
 describe("Unit test for get /user/product endpoint", () => {
     afterEach(()=>{
         server.close()
@@ -16,6 +17,7 @@ describe("Unit test for get /user/product endpoint", () => {
       }]))
         const response = await request(server)
             .get('/user/product')
+            .set('authorization', `Bearer ${token}`)
             
 
         expect(response.status).toBe(200);
@@ -27,6 +29,7 @@ describe("Unit test for get /user/product endpoint", () => {
         })
           const response = await request(server)
               .get('/user/product')
+              .set('authorization', `Bearer ${token}`)
           expect(response.status).toBe(500);
       });
 });
@@ -49,6 +52,7 @@ describe('Unit test for put /user/purchase endpoint', () => {
       const response = await request(server)
         .put('/user/purchase')
         .send(payload)
+        .set('authorization', `Bearer ${token}`)
         
       expect(response.status).toBe(201)
       expect(response.body).toHaveProperty('message', 'Your orders have been confirmed');
@@ -69,6 +73,7 @@ describe('Unit test for put /user/purchase endpoint', () => {
         const response = await request(server)
           .put('/user/purchase')
           .send(payload)
+          .set('authorization', `Bearer ${token}`)
           
         expect(response.status).toBe(500)
         expect(response.body).toHaveProperty('message', 'Internal server error, please try again later');
