@@ -36,6 +36,6 @@ app.use(cors({
 app.use('/api-docs',swaggerUI.serve,swaggerUI.setup(specs))
 app.use(router)
 
-app.listen(PORT,()=>console.log(`Listening on port ${PORT}`))
+const server = app.listen(PORT,()=>console.log(`Listening on port ${PORT}`))
 
-module.exports = app
+module.exports = server

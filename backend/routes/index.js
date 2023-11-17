@@ -31,7 +31,7 @@ router.post('/login', async (req, res) => {
 }); 
 
 
-router.use(isAuthenticated)
+//router.use(isAuthenticated)
 router.get('/checkauth',(req,res)=>{
     res.sendStatus(200)
 })
