@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "cls && jest",
+    "test": "cls && set PORT=0&&jest --watchAll --verbose",
     "dev": "nodemon index.js"
   },
   "keywords": [],

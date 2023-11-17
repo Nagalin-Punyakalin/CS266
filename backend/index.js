@@ -7,7 +7,8 @@ require('dotenv').config()
 const app = express()
 const router = require('./routes/')
 const PORT = process.env.PORT
-require('./database/database');
+require('./database/database')
+require('dotenv').config()
 
 const options = {
     definition: {
