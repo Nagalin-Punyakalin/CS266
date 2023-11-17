@@ -8,7 +8,7 @@ const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIiLCJy
 describe("Unit test for get /user/product endpoint", () => {
     afterEach(()=>{
         server.close()
-    })
+    },10000)
     it('should fetch all the product in database', async () => {
       // Mocking the Product.find method
       Product.find.mockImplementationOnce(() => ([{
@@ -52,7 +52,7 @@ describe("Unit test for get /user/product endpoint", () => {
 describe('Unit test for put /user/purchase endpoint', () => {
     afterEach(()=>{
         server.close()
-    })
+    },10000)
     it('should successfully confirm orders', async () => {
       const payload = [
         {
