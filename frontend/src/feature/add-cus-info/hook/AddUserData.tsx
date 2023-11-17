@@ -14,7 +14,6 @@ export default function AddAddress() {
     const subAreaRef = useRef<HTMLInputElement>(null)
     const provinceRef = useRef<HTMLInputElement>(null)
     const postalCodeRef = useRef<HTMLInputElement>(null)
-    const emailRef = useRef<HTMLInputElement>(null)
     const [error, setError] = useState<string>('')
 
     const storeSubmit = (): void => {
@@ -32,7 +31,6 @@ export default function AddAddress() {
                 province: provinceRef,
                 postalCode: postalCodeRef
             },
-            emailRef
         }
 
         axios.put('/user/address', data)
@@ -59,7 +57,6 @@ export default function AddAddress() {
         subAreaRef,
         provinceRef,
         postalCodeRef,
-        emailRef,
         error,
         storeSubmit
     }
