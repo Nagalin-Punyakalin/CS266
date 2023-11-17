@@ -12,11 +12,11 @@ export default function AddAddress() {
 
     const storeSubmit = () => {
         const data = {
-            Name: document.getElementById("formName"),
-            Surname: document.getElementById("formSurname"),
-            Phone: document.getElementById("formPhoneNumber"),
-            Address: document.getElementById("formAddress"),
-            Email: document.getElementById("formEmail"),
+            nameRef: document.getElementById("formName"),
+            surnameRef: document.getElementById("formSurname"),
+            phoneRef: document.getElementById("formPhoneNumber"),
+            addressRef: document.getElementById("formAddress"),
+            emailRef: document.getElementById("formEmail"),
         }
         axios.put('/user/add-cus-info', data)
         .then(response=>{
