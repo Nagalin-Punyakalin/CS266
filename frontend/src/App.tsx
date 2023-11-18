@@ -6,6 +6,7 @@ import { About } from "./pages/About"
 import { BuyProduct } from "./pages/Buyproduct"
 import { AddCustomerInfo } from "./pages/AddCustomerInfo"
 import { AddProduct } from "./pages/AddProduct"
+import {MyOrder} from './pages/MyOrder'
 import { Login } from "./pages/Login"
 import { Navbar } from "./components/Navbar"
 import { ShoppingCartProvider } from "./context/ShoppingCartContext"
@@ -22,6 +23,7 @@ function App() {
 
           <Route element={<Navbar />}>
           <Route path="/homepage" element={<Home />} />
+          <Route path="/order" element={<MyOrder/>}></Route>
           <Route path="/store" element={<Store />} />
           <Route path="/about" element={<About />} />
           <Route path="/buyproduct" element={<BuyProduct />} />

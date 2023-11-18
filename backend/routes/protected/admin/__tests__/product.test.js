@@ -16,11 +16,11 @@ afterEach(() => {
             console.log(`Deleted: ${filePath}`);
         }
     });
-});
+},10000);
 
 afterEach(()=>{
     server.close()
-})
+},10000)
 describe("Unit test for admin's product endpoint", () => {
     
     it('should send a status code of 201 when adding a new product', async () => {

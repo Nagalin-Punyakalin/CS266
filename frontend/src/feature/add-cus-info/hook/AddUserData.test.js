@@ -1,5 +1,5 @@
 import { renderHook, act } from '@testing-library/react'; 
-import AddAddress from './AddAddress';
+import AddUserData from './AddUserData';
 import axios from '../../../lib/axios'
 import Swal from 'sweetalert2';
 
@@ -8,7 +8,7 @@ jest.mock('sweetalert2', () => ({
   fire: jest.fn(),
 }));
 
-describe('Unit test AddAddress hook', () => {
+describe('Unit test AddUserData hook', () => {
   let mockEvent;
 
   beforeEach(() => {
@@ -20,7 +20,7 @@ describe('Unit test AddAddress hook', () => {
   });
 
   it('should allow user to add an address', async () => {
-    const { result } = renderHook(() => AddAddress());
+    const { result } = renderHook(() => AddUserData());
 
     axios.put.mockResolvedValue({
       status: 201,
@@ -37,7 +37,7 @@ describe('Unit test AddAddress hook', () => {
   });
 
  it('should handle internal server error',async()=>{
-    const { result } = renderHook(() => AddAddress());
+    const { result } = renderHook(() => AddUserData());
 
     axios.put.mockRejectedValue({
       response: {
@@ -57,7 +57,7 @@ describe('Unit test AddAddress hook', () => {
   })
 
   it('should handle 400 bad request',async()=>{
-    const { result } = renderHook(() => AddAddress());
+    const { result } = renderHook(() => AddUserData());
 
     axios.put.mockRejectedValue({
       response: {

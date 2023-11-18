@@ -16,22 +16,23 @@ export default function AddAddress() {
     const postalCodeRef = useRef<HTMLInputElement>(null)
     const [error, setError] = useState<string>('')
 
-    const storeSubmit = (): void => {
+    const handleSubmit = (): void => {
         const data = {
             nameRef,
             surnameRef,
             phoneRef,
             address: {
-                houseNumber: houseNumberRef,
-                village: villageRef,
-                alley: alleyRef,
-                street: streetRef,
-                subDistric: subDistricRef,
-                subArea: subAreaRef,
-                province: provinceRef,
-                postalCode: postalCodeRef
-            },
+                houseNumberRef,
+                villageRef,
+                alleyRef,
+                streetRef,
+                subDistricRef,
+                subAreaRef,
+                provinceRef,
+                postalCodeRef
+            }
         }
+
 
         axios.put('/user/address', data)
             .then(response => {
@@ -58,6 +59,6 @@ export default function AddAddress() {
         provinceRef,
         postalCodeRef,
         error,
-        storeSubmit
+        handleSubmit
     }
 }

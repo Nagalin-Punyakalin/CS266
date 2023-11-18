@@ -39,6 +39,11 @@ export function Navbar() {
              Profile
            </Nav.Link>
            }
+
+            {role === 'user' &&
+            <Nav.Link to="/order" as={NavLink}> 
+              My orders
+            </Nav.Link>}
            
 
           </Nav>
