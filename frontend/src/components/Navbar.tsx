@@ -83,6 +83,7 @@ export function Navbar() {
           <button
               onClick={() => {
                 localStorage.removeItem('jwt');
+                localStorage.removeItem('role')
                 navigate('/')
               }}
               className="btn"
