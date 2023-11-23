@@ -3,37 +3,34 @@ import axios from '../../../lib/axios'
 import Swal from 'sweetalert2';
 
 export default function AddAddress() {
-    const nameRef = useRef<HTMLInputElement>(null)
-    const surnameRef = useRef<HTMLInputElement>(null)
-    const phoneRef = useRef<HTMLInputElement>(null)
-    const houseNumberRef = useRef<HTMLInputElement>(null)
-    const villageRef = useRef<HTMLInputElement>(null)
-    const alleyRef = useRef<HTMLInputElement>(null)
-    const streetRef = useRef<HTMLInputElement>(null)
-    const subDistricRef = useRef<HTMLInputElement>(null)
-    const subAreaRef = useRef<HTMLInputElement>(null)
-    const provinceRef = useRef<HTMLInputElement>(null)
-    const postalCodeRef = useRef<HTMLInputElement>(null)
+    const name = useRef<HTMLInputElement>(null)
+    const surname = useRef<HTMLInputElement>(null)
+    const phone = useRef<HTMLInputElement>(null)
+    const houseNumber = useRef<HTMLInputElement>(null)
+    const village = useRef<HTMLInputElement>(null)
+    const alley = useRef<HTMLInputElement>(null)
+    const street = useRef<HTMLInputElement>(null)
+    const subDistric = useRef<HTMLInputElement>(null)
+    const subArea = useRef<HTMLInputElement>(null)
+    const province = useRef<HTMLInputElement>(null)
+    const postalCode = useRef<HTMLInputElement>(null)
     const [error, setError] = useState<string>('')
 
     const handleSubmit = (): void => {
         const data = {
-            nameRef,
-            surnameRef,
-            phoneRef,
-            address: {
-                houseNumberRef,
-                villageRef,
-                alleyRef,
-                streetRef,
-                subDistricRef,
-                subAreaRef,
-                provinceRef,
-                postalCodeRef
-            }
+            name,
+            surname,
+            phone,
+            houseNumber,
+            village,
+            alley,
+            street,
+            subDistric,
+            subArea,
+            province,
+            postalCode
         }
-
-
+        
         axios.put('/user/address', data)
             .then(response => {
                 if (response.status === 201) {
@@ -47,17 +44,17 @@ export default function AddAddress() {
     }
 
     return {
-        nameRef,
-        surnameRef,
-        phoneRef,
-        houseNumberRef,
-        villageRef,
-        alleyRef,
-        streetRef,
-        subDistricRef,
-        subAreaRef,
-        provinceRef,
-        postalCodeRef,
+        name,
+        surname,
+        phone,
+        houseNumber,
+        village,
+        alley,
+        street,
+        subDistric,
+        subArea,
+        province,
+        postalCode,
         error,
         handleSubmit
     }

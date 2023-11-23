@@ -8,7 +8,7 @@ const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIiLCJy
 const addressData = {
     _id: 'id',
     houseNumber : 'test',
-    villgeNumber : 'test',
+    village : 'test',
     alley : 'test',
     street : 'test',
     subDistrict : 'test',
@@ -34,18 +34,7 @@ describe('Address Router', () => {
 
     // Assert the response
     expect(response.status).toBe(200);
-    expect(response.body).toEqual({
-        _id: 'id',
-        houseNumber : 'test',
-        villgeNumber : 'test',
-        alley : 'test',
-        street : 'test',
-        subDistrict : 'test',
-        subArea : 'test',
-        province : 'test',
-        postalCode : 'test',
-        phone : 'test'
-       })
+    expect(response.body).toEqual(addressData)
   });
 
   test('should handle internal server error', async () => {
