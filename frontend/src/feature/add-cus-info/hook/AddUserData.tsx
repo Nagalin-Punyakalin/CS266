@@ -1,4 +1,4 @@
-import React, { useRef,useState } from 'react'
+import React, { FormEvent, useRef,useState } from 'react'
 import axios from '../../../lib/axios'
 import Swal from 'sweetalert2';
 
@@ -16,7 +16,12 @@ export default function AddAddress() {
     const postalCode = useRef<HTMLInputElement>(null)
     const [error, setError] = useState<string>('')
 
-    const handleSubmit = (): void => {
+    //
+
+    const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
+        e.preventDefault()
+    //ไปดู useRef ใน data ยังใช้ไม่ถูก
+    //แก้เป็น obj แบบ key,value
         const data = {
             name,
             surname,

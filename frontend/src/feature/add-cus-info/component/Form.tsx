@@ -17,7 +17,7 @@ export default function InformationForm() {
     province,
     postalCode,
     error,
-    handleSubmit
+    handleSubmit //เรียกใช้ด้วย
   } = AddUserData()
   return (
     <Form>

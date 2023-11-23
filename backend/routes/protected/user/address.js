@@ -3,8 +3,10 @@ const Address = require('../../../database/Address');
 
 router.post('/address', async (req, res) => {
   const address = req.body;
+  console.log(address)
   try {
     const UserAddress = new Address({
+      //value . ให้ตรงกับ key ที่เขียนใน hook
       houseNumber : address.houseNumber,
       village : address.village,
       alley : address.alley,
