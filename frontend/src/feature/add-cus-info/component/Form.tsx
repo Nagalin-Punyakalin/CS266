@@ -1,7 +1,8 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
-import AddUserData from '../hook/AddUserData'
+import AddUserData from '../hook/useAddUserData'
 import Form from 'react-bootstrap/Form';
+import useAddUserData from '../hook/useAddUserData';
 
 export default function InformationForm() {
   const {
@@ -18,9 +19,9 @@ export default function InformationForm() {
     postalCode,
     error,
     handleSubmit //เรียกใช้ด้วย
-  } = AddUserData()
+  } = useAddUserData()
   return (
-    <Form>
+    <Form onSubmit={handleSubmit}>
       <div className="mb-3 row">
         <Form.Group controlId="formName" className="col-md-4">
           <Form.Label>Name</Form.Label>
@@ -126,10 +127,16 @@ export default function InformationForm() {
           />
         </Form.Group>
       </div>
+     
 
       <Button variant="primary" type="submit">
         Submit
       </Button>
+      {error && 
+         <div className="alert alert-danger mt-4" >
+         {error}
+        </div>
+      }
     </Form>
   );
 }

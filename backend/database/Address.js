@@ -1,6 +1,9 @@
 const mongoose = require('mongoose')
 
 const address = new mongoose.Schema({
+    name : String,
+    surname : String,
+    phone : String,
     houseNumber : String,
     village : String,
     alley : String,
@@ -9,7 +12,6 @@ const address = new mongoose.Schema({
     subArea : String,
     province : String,
     postalCode : String,
-    phone : String
   });
 
 module.exports =  mongoose.model('Address',address)
