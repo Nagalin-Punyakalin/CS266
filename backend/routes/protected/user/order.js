@@ -1,6 +1,37 @@
 const router = require('express').Router()
 const Purchase = require('../../../database/Purchase')
 
+/**
+ * @swagger
+ * /user/slip:
+ *   post:
+ *     summary: Save slip image into backend/public and image name to database
+ *     description: Endpoint to add a slip
+ *     security:
+ *       - jwt: []
+ *     requestBody:
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               image:
+ *                 type: string
+ *                 format: binary
+ *     responses:
+ *       '201':
+ *         description: Image saved successfully
+ *       '500':
+ *         description: Internal server error, please try again later
+ *     securitySchemes:
+ *       jwt:
+ *         type: apiKey
+ *         in: header
+ *         name: authorization
+ *         description: Enter JWT token as Bearer {wer}
+ */
+
+
 router.get('/order', async (req, res) => {
     try {
         const purchases = await Purchase.find().populate('products'); // Populate the 'products' field
