@@ -1,4 +1,5 @@
 const router = require('express').Router()
+const Order = require('../../../database/Order');
 const Product = require('../../../database/Product')
 const Purchase = require('../../../database/Purchase')
 
@@ -42,12 +43,16 @@ router.put('/purchase', async (req, res) => {
     const payload = req.body;
     
     try {
+        const order = new Order()
+        console.log(order._id)
+        await order.save()
         for (const currPayload of payload) {
                 const newPurchase = new Purchase({
                     quantity: currPayload.quantity,
                     status: 'Pending payment',
                     total: currPayload.total,
                     products: currPayload.id,
+                    orderID: order._id
                 })
                 await newPurchase.save();
             } 

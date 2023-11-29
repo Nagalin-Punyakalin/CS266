@@ -1,5 +1,5 @@
 import { Container } from 'react-bootstrap';
-import Purchase from '../feature/confirm-purchase/component/Purchase';
+import Purchase from '../feature/show-cus-status/component/Status';
 
 
 export function MyOrder() {
