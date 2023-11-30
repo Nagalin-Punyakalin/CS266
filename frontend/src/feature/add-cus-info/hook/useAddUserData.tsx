@@ -20,8 +20,6 @@ export default function useAddUserData() {
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
         e.preventDefault()
-    //ไปดู useRef ใน data ยังใช้ไม่ถูก
-    //แก้เป็น obj แบบ key,value
         const data = {
             name : name.current?.value,
             surname : surname.current?.value,
