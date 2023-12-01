@@ -36,7 +36,7 @@ router.get('/order', async (req, res) => {
         const groupedPurchases = new Map();
 
         purchases.forEach((purchase) => {
-            const orderID = purchase.orderID ? purchase.orderID._id : null;
+            const orderID = purchase.orderID ? purchase.orderID.orderID : null;
 
             if (!groupedPurchases.has(orderID)) {
                 groupedPurchases.set(orderID, []);
