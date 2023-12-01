@@ -91,7 +91,7 @@ const response = await request(server)
     .get('/user/order')
     .set('authorization', `Bearer ${token}`);
       expect(response.status).toBe(500);
-      expect(response.body.message).toBe('Internal Server Error, please try again leter')
+      expect(response.body.message).toBe('Internal Server Error, please try again later')
   
 });
 
