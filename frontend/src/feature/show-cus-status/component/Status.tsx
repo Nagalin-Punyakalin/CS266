@@ -1,21 +1,19 @@
 import React from 'react';
-import { Button, Table, Form } from 'react-bootstrap';
+import { Button, Table } from 'react-bootstrap';
 
 import { formatCurrency } from '../../../utilities/formatCurrency';
 import useFetch from '../../../hooks/useFetch';
 
+interface OrderItem {
+  quantity: number;
+  status: string;
+  total: number;
+  productName: string;
+  orderID: number;
+}
+
 export default function ProductCon() {
-  interface OrderItems {
-    name: string;
-    total: number;
-    quantity: number;
-    status: string;
-  }
-
-
-  const [data, error] = useFetch<OrderItems[]>('/user/order', []);
-
-  console.log(data);
+  const [data, error] = useFetch<OrderItem[][]>('/user/order', []);
 
   const centerContentStyle: React.CSSProperties = {
     display: 'flex',
@@ -43,9 +41,7 @@ export default function ProductCon() {
     textAlign: 'center',
     boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.1)',
     borderRight: 'none'
-  }
-
-
+  };
 
   const borderMiddle: React.CSSProperties = {
     border: '4px solid #F8F9FA',
@@ -55,7 +51,6 @@ export default function ProductCon() {
     boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.1)',
   };
 
-
   const borderProductLeft: React.CSSProperties = {
     border: '4px solid #F8F9FA',
     background: '#ffff',
@@ -63,16 +58,14 @@ export default function ProductCon() {
     borderBottomLeftRadius: '20px',
     padding: '4px',
     textAlign: 'center',
-    
-  }
+  };
 
   const borderProductMiddle: React.CSSProperties = {
     border: '4px solid #F8F9FA',
     background: '#ffff',
     padding: '4px',
     textAlign: 'center',
-    
-  }
+  };
 
   const borderProductRight: React.CSSProperties = {
     border: '4px solid #F8F9FA',
@@ -81,9 +74,7 @@ export default function ProductCon() {
     borderBottomRightRadius: '20px',
     padding: '4px',
     textAlign: 'center',
-    
-  }
-
+  };
 
   const centerText: React.CSSProperties = {
     textAlign: 'center',
@@ -94,15 +85,16 @@ export default function ProductCon() {
     padding: '4px',
     textAlign: 'center',
     height: '',
-    width: '112px', 
+    width: '112px',
   };
 
   const HeadList: React.CSSProperties = {
     marginBottom: '20px',
   };
-  
+
   const List: React.CSSProperties = {
     marginBottom: '15px',
+    marginTop: '10px',
   };
 
   const SpaceAfterList: React.CSSProperties = {
@@ -110,12 +102,12 @@ export default function ProductCon() {
   };
 
   const RemoveLine: React.CSSProperties = {
-    border: '#F8F9FA'
-  }
+    border: 'none',
+  };
 
   const DeletText: React.CSSProperties = {
     visibility: 'hidden',
-  }
+  };
 
   return (
     <>
@@ -123,7 +115,6 @@ export default function ProductCon() {
         <h1>Purchase list</h1>
         <p>List the status of your ordered products.</p>
       </div>
-      
 
       <div className="ProductList" style={centerContentStyle}>
         <div>
@@ -132,31 +123,45 @@ export default function ProductCon() {
         <Table>
           <thead>
             <tr className='HeadList' style={HeadList}>
-              <th style={borderedCellLeft}>Order no.</th> 
-                <th style={borderMiddle}>Order Status</th> 
-                <th style={borderedCellRight}>Order price</th>
+              <th style={borderedCellLeft}>Order no.</th>
+              <th style={borderMiddle}>Order Status</th>
+              <th style={borderedCellRight}>Order price</th>
             </tr>
           </thead>
-          <p style={RemoveLine}></p>
           <tbody style={RemoveLine}>
-            {data?.map((currItems, index) => (
-              <tr key={index} className='List'  style={{ ...List, ...SpaceAfterList }}>
-                <td style={{ ...borderProductLeft, ...centerText,}}><strong>{++index}</strong>
-                <p>Product Name</p>
-                <p>{currItems.name}</p>
-                </td>
-                <td style={{ ...borderProductMiddle, ...centerText }}>
-                <p style={DeletText}> - </p>
-                <strong>{currItems.status}</strong></td>
-                <td style={{ ...borderProductRight, ...centerText }}>
-                <strong>{formatCurrency(currItems.total)}</strong>
-                <p>Price of each product</p>
-                <p>{formatCurrency(currItems.total)}</p></td>
-                <td style={ButtonAttachslip}>
-                  <Button variant="success">Attach slip</Button>
-                </td>
-              </tr>
-            ))}
+            {data?.map((order, orderIndex) => {
+              const totalPrice = order.reduce((acc, currItem) => acc + currItem.total, 0);
+
+              return (
+                <tr key={orderIndex} className='List' style={{ ...List, ...SpaceAfterList }}>
+                  <td style={{ ...borderProductLeft, ...centerText }}>
+                    <strong>{++orderIndex}</strong>
+                    <p>Product Name</p>
+                    {order.map((currItem, index) => (
+                      <React.Fragment key={index}>
+                        <p>{currItem.productName}</p>
+                      </React.Fragment>
+                    ))}
+                  </td>
+                  <td style={{ ...borderProductMiddle, ...centerText }}>
+                    <p style={DeletText}> - </p>
+                    <strong>{order[0].status}</strong>
+                  </td>
+                  <td style={{ ...borderProductRight, ...centerText }}>
+                    <strong className='Total price'>{formatCurrency(totalPrice)}</strong>
+                    <p>Price of each product</p>
+                    {order.map((currItem, index) => (
+                      <React.Fragment key={index}>
+                        <p>qty. {currItem.quantity} {formatCurrency(currItem.total)}</p>
+                      </React.Fragment>
+                    ))}
+                  </td>
+                  <td style={ButtonAttachslip}>
+                    <Button variant="success">Attach slip</Button>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </Table>
       </div>
