@@ -1,16 +1,18 @@
 const mongoose = require('mongoose')
 
-const addressSchema = new mongoose.Schema({
+const address = new mongoose.Schema({
+    name : String,
+    surname : String,
+    phone : String,
     houseNumber : String,
-    villgeNumber : String,
+    village : String,
     alley : String,
     street : String,
     subDistrict : String,
     subArea : String,
     province : String,
     postalCode : String,
-    phone : String
   });
 
-module.exports =  mongoose.model('Address',addressSchema)
+module.exports =  mongoose.model('Address',address)
 

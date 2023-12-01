@@ -1,31 +1,32 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
-import AddUserData from '../hook/AddUserData'
+import AddUserData from '../hook/useAddUserData'
 import Form from 'react-bootstrap/Form';
+import useAddUserData from '../hook/useAddUserData';
 
 export default function InformationForm() {
   const {
-    nameRef,
-    surnameRef,
-    phoneRef,
-    houseNumberRef,
-    villageRef,
-    alleyRef,
-    streetRef,
-    subDistricRef,
-    subAreaRef,
-    provinceRef,
-    postalCodeRef,
+    name,
+    surname,
+    phone,
+    houseNumber,
+    village,
+    alley,
+    street,
+    subDistric,
+    subArea,
+    province,
+    postalCode,
     error,
-    storeSubmit
-  } = AddUserData()
+    handleSubmit //เรียกใช้ด้วย
+  } = useAddUserData()
   return (
-    <Form>
+    <Form onSubmit={handleSubmit}>
       <div className="mb-3 row">
         <Form.Group controlId="formName" className="col-md-4">
           <Form.Label>Name</Form.Label>
           <Form.Control
-            ref = {nameRef}
+            ref = {name}
             type="text"
             placeholder="Enter your name"
           />
@@ -34,7 +35,7 @@ export default function InformationForm() {
         <Form.Group controlId="formSurname" className="col-md-4">
           <Form.Label>Surname</Form.Label>
           <Form.Control
-            ref = {surnameRef}
+            ref = {surname}
             type="text"
             placeholder="Enter your surname"
           />
@@ -43,7 +44,7 @@ export default function InformationForm() {
         <Form.Group controlId="formPhoneNumber" className="col-md-4">
           <Form.Label>Phone Number</Form.Label>
           <Form.Control
-            ref = {phoneRef}
+            ref = {phone}
             type="text"
             placeholder="Enter your phone number"
             
@@ -55,7 +56,7 @@ export default function InformationForm() {
         <Form.Group controlId="formHouseNumber" className="col-md-3">
           <Form.Label>House Number</Form.Label>
           <Form.Control
-            ref = {houseNumberRef}
+            ref = {houseNumber}
             type="text"
             placeholder="Enter your house number"
           />
@@ -64,7 +65,7 @@ export default function InformationForm() {
         <Form.Group controlId="formVillage" className="col-md-3">
           <Form.Label>Village</Form.Label>
           <Form.Control
-            ref = {villageRef}
+            ref = {village}
             type="text"
             placeholder="Enter your village"
           />
@@ -73,7 +74,7 @@ export default function InformationForm() {
         <Form.Group controlId="formAlley" className="col-md-3">
           <Form.Label>Alley</Form.Label>
           <Form.Control
-            ref = {alleyRef}
+            ref = {alley}
             type="text"
             placeholder="Enter your alley"
           />
@@ -82,7 +83,7 @@ export default function InformationForm() {
         <Form.Group controlId="formStreet" className="col-md-3">
           <Form.Label>Street</Form.Label>
           <Form.Control
-            ref = {streetRef}
+            ref = {street}
             type="text"
             placeholder="Enter your street"
           />
@@ -93,7 +94,7 @@ export default function InformationForm() {
         <Form.Group controlId="formSubDistric" className="col-md-3">
           <Form.Label>Sub-Distric</Form.Label>
           <Form.Control
-            ref = {subDistricRef}
+            ref = {subDistric}
             type="text"
             placeholder="Enter your sub-distric"
           />
@@ -102,7 +103,7 @@ export default function InformationForm() {
         <Form.Group controlId="formSubArea" className="col-md-3">
           <Form.Label>Sub-Area</Form.Label>
           <Form.Control
-            ref = {subAreaRef}
+            ref = {subArea}
             type="text"
             placeholder="Enter your sub-area"
           />
@@ -111,7 +112,7 @@ export default function InformationForm() {
         <Form.Group controlId="formProvince" className="col-md-3">
           <Form.Label>Province</Form.Label>
           <Form.Control
-            ref = {provinceRef}
+            ref = {province}
             type="text"
             placeholder="Enter your province"
           />
@@ -120,16 +121,22 @@ export default function InformationForm() {
         <Form.Group controlId="formPostalCode" className="col-md-3">
           <Form.Label>Postal Code</Form.Label>
           <Form.Control
-            ref = {postalCodeRef}
+            ref = {postalCode}
             type="text"
             placeholder="Enter your postal code"
           />
         </Form.Group>
       </div>
+     
 
       <Button variant="primary" type="submit">
         Submit
       </Button>
+      {error && 
+         <div className="alert alert-danger mt-4" >
+         {error}
+        </div>
+      }
     </Form>
   );
 }

@@ -59,7 +59,7 @@ export default function ProductCon() {
                 <td>{++index}</td>
                 <td>{currItems.name}</td>
                 <th>{getItemQuantity(currItems.id)}</th>
-                <td>{formatCurrency(currItems.price)}</td>
+                <td>{formatCurrency(currItems.price * currItems.quantity)}</td>
               </tr>
               ))
             }

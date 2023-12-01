@@ -17,7 +17,7 @@ const options = {
             title: 'API Documentation',
             version: '1.0.0',
             description: 'Express API for shopping website'
-        },
+        },        
         servers: [
             {
                 url: 'http://localhost:8000'

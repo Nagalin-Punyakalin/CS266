@@ -1,46 +1,31 @@
 const router = require('express').Router();
 const Address = require('../../../database/Address');
-/**
- * @swagger
- * /admin/add-product:
- *   put:
- *     summary: Add a new product if it not already exists
- *     description: Endpoint to add a new product with image.
- *     requestBody:
- *       content:
- *         multipart/form-data:
- *           schema:
- *             type: object
- *             properties:
- *               name:
- *                 type: string
- *               price:
- *                 type: number
- *               image:
- *                 type: string
- *                 format: binary
- *     responses:
- *       '201':
- *         description: Product added successfully
- *       '409':
- *         description: Product already exists in the store
- *       '500':
- *         description: Internal server error, please try again later
- */
-router.post('/Address', async (req, res) => {
+
+router.post('/address', async (req, res) => {
+  const address = req.body;
+
   try {
-    const { useraddress } = req.body;
-    console.log('Request Body:', req.body);
-    const UserAddress = Address({
-      useraddress
+    const UserAddress = new Address({
+      //value . ให้ตรงกับ key ที่เขียนใน hook
+      name : address.name,
+      surname : address.surname,
+      phone : address.phone,
+      houseNumber : address.houseNumber,
+      village : address.village,
+      alley : address.alley,
+      street : address.street,
+      subDistrict : address.subDistrict,
+      subArea : address.subArea,
+      province : address.province,
+      postalCode : address.postalCode
     })
     await UserAddress.save();
 
-    res.status(200).json(UserAddress);
+    res.status(201).json({message : 'Your info have been saved'});
 
   } catch (error) {
     console.error(error);
-    res.status(500).send('Internal Server Error');
+    res.status(500).json({message : 'Internal Server Error'});
   }
 });
 
