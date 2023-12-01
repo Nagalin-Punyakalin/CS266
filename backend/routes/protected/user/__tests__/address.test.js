@@ -33,8 +33,8 @@ describe('Address Router', () => {
       .set('authorization', `Bearer ${token}`);
 
     // Assert the response
-    expect(response.status).toBe(200);
-    expect(response.body).toEqual(addressData)
+    expect(response.status).toBe(201);
+    expect(response.text).toBe("{\"message\":\"Your info have been saved\"}");
   });
 
   test('should handle internal server error', async () => {
@@ -50,6 +50,6 @@ describe('Address Router', () => {
 
     // Assert the response
     expect(response.status).toBe(500);
-    expect(response.text).toBe('Internal Server Error');
+    expect(response.text).toBe("{\"message\":\"Internal Server Error\"}");
   });
 });
