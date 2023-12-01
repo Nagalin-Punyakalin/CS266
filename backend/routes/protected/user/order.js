@@ -1,5 +1,8 @@
 const router = require('express').Router()
+const multer = require('multer')
 const Purchase = require('../../../database/Purchase')
+const Order = require('../../../database/Order')
+const path = require('path')
 
 /**
  * @swagger
@@ -19,12 +22,29 @@ const Purchase = require('../../../database/Purchase')
  *               image:
  *                 type: string
  *                 format: binary
+ *               orderID:
+ *                  type: string
  *     responses:
  *       '201':
  *         description: Image saved successfully
  *       '500':
  *         description: Internal server error, please try again later
  */
+
+const storage = multer.diskStorage({
+    destination : (req,file,cb)=>{
+        cb(null,'public')
+    },
+
+    filename : (req,file,cb)=>{
+        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+        const originalFileName = path.parse(file.originalname).name;
+        const newFileName = `${originalFileName}_${uniqueSuffix}${path.extname(file.originalname)}`;
+        cb(null, newFileName);
+    }
+})
+
+const upload = multer({storage : storage})
 
 
 
@@ -62,6 +82,37 @@ router.get('/order', async (req, res) => {
         res.status(500).json({ message: 'Internal Server Error, please try again later' });
     }
 });
+
+router.post('/slip',upload.single('image'),async(req,res)=>{
+
+    try {
+        const orderID = parseInt(req.body.orderID)
+        console.log(orderID)
+    
+        const order = await Order.findOne({orderID : orderID})
+        if (!order) return res.status(404).json({ message: 'Order not found' });
+    
+        order.slipName = req.file.filename
+        await order.save()
+        const purchase = await Purchase.find().populate('orderID')
+    
+        purchase.map(async curr=>{
+            if(curr.orderID.orderID === orderID) {
+                curr.status='wreer'
+                await curr.save()
+            }
+        })
+
+         res.status(201).json({message : 'Your slip have been uploaded'})
+        
+        
+    } catch (error) {
+        console.error(error)
+        res.status(500).json({message : 'Internal server error, please try again later'})
+        
+    }
+
+})
 
 
 module.exports = router
