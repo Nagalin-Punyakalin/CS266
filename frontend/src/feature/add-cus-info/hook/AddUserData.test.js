@@ -36,6 +36,27 @@ describe('Unit test useAddUserData hook', () => {
     expect(result.current.error).toBe('');
   });
 
+  it('should handle invalid input', async () => {
+    const { result } = renderHook(() => useAddUserData());
+  
+    axios.post.mockRejectedValue({
+      response: {
+        status: 400,
+        data: {
+          message: 'Invalid input, please check your data'
+        }
+      }
+    });
+  
+    await act(async () => {
+      result.current.handleSubmit(mockEvent);
+    });
+  
+    expect(axios.post).toHaveBeenCalledWith('/user/address', expect.anything());
+    expect(result.current.error).toBe('Invalid input, please check your data');
+  });
+  
+
  it('should handle internal server error',async()=>{
     const { result } = renderHook(() => useAddUserData());
 
