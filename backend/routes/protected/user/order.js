@@ -51,7 +51,6 @@ const upload = multer({storage : storage})
 router.get('/order', async (req, res) => {
     try {
         const purchases = await Purchase.find().populate('products orderID');
-        console.log(purchases)
 
         // Create a Map to store purchases grouped by orderID
         const groupedPurchases = new Map();
@@ -88,7 +87,6 @@ router.post('/slip',upload.single('image'),async(req,res)=>{
 
     try {
         const orderID = parseInt(req.body.orderID)
-        console.log(orderID)
     
         const order = await Order.findOne({orderID : orderID})
         if (!order) return res.status(404).json({ message: 'Order not found' });

@@ -95,8 +95,6 @@ export default function ProductCon() {
           }).then(async(result) => {
             if (result.isConfirmed) {
               handleOrder()
-              removeCart()
-              navigate('/order')
             }
           });
         }} variant="primary" type="submit" className="mx-2">
