@@ -51,6 +51,7 @@ const upload = multer({storage : storage})
 router.get('/order', async (req, res) => {
     try {
         const purchases = await Purchase.find().populate('products orderID');
+        console.log(purchases)
 
         // Create a Map to store purchases grouped by orderID
         const groupedPurchases = new Map();

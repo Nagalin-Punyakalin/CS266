@@ -10,40 +10,44 @@ describe('Unit test for get /user/order endpoint',()=>{
   afterEach(()=>{
     server.close()
 },10000)
-    it('should fetch all the order in database', async () => {
-    
-        Purchase.find.mockImplementationOnce(() => ({
-          populate: jest.fn().mockResolvedValue(
-            [
-              {
-                quantity: 1,
-                status: "Pending payment",
-                total: 134,
-                products: { name: "test1",},
-                orderID: 123,
-              },
-            ]
-          ),
-        }));
+it('should fetch all the orders in the database', async () => {
+  // Mocking the Purchase.find method
+  Purchase.find.mockImplementationOnce(() => ({
+    populate: jest.fn().mockResolvedValue([
+      {
+        quantity: 1,
+        status: "Pending payment",
+        total: 134,
+        products: {
+          name: 'test',
+          price: 100,
+          imageName: 'book_1699806339172-279559867.jpg',
+        },
+        orderID: { orderID: 123 },
+      },
+    ]),
+  }));
 
-      const response = await request(server)
-          .get('/user/order')
-          .set('authorization', `Bearer ${token}`);
-      expect(response.status).toBe(200);
-      expect(response.body).toEqual(
-        [
-          [
-            {
-              quantity: 1,
-              status: "Pending payment",
-              total: 134,
-              productName: "test1" ,
-              orderID: 123,
-            }
-          ]
-        ]
-      )
+  const response = await request(server)
+    .get('/user/order')
+    .set('authorization', `Bearer ${token}`);
+
+  expect(response.status).toBe(200);
+  console.log("response body: " +JSON.stringify(response.body))
+
+
+  expect(response.body).toEqual([
+    [{
+      "quantity":1,
+      "status":"Pending payment",
+      "total":134,
+      "productName":"test",
+      "orderID":123
+    }]
+  ]
+   );
 });
+
 
 it('should return 500 status when error occurs', async () => {
     
