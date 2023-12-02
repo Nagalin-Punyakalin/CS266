@@ -99,7 +99,7 @@ router.post('/slip',upload.single('image'),async(req,res)=>{
     
         purchase.map(async curr=>{
             if(curr.orderID.orderID === orderID) {
-                curr.status='wreer'
+                curr.status='Waiting for payment verification'
                 await curr.save()
             }
         })

@@ -22,6 +22,7 @@ type ShoppingCartContext = {
   increaseCartQuantity:  (id: string,name : string,price : number,imageName : string) => void
   decreaseCartQuantity: (id: string) => void
   removeFromCart: (id: string) => void
+  removeCart: () => void
   cartQuantity: number
   cartItems: CartItem[]
 }
@@ -84,6 +85,10 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
     })
   }
 
+  function removeCart() : void {
+    setCartItems([])
+  }
+
   function getItemTotal(id: string) {
     const price =  cartItems.find(item => item.id === id)?.price || 0
     return price * getItemQuantity(id)
@@ -94,6 +99,7 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
       value={{
         getItemQuantity,
         getItemTotal,
+        removeCart,
         increaseCartQuantity,
         decreaseCartQuantity,
         removeFromCart,
