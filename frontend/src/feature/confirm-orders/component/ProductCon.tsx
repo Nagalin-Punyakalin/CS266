@@ -1,28 +1,33 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button, Image, Table, Form } from 'react-bootstrap';
 import { useShoppingCart } from '../../../context/ShoppingCartContext';
 import { formatCurrency } from '../../../utilities/formatCurrency';
 import Swal from 'sweetalert2';
 import useConfirmOrder from '../hook/useConfirmOrder';
+import { useNavigate } from 'react-router-dom';
 export default function ProductCon() {
+  const navigate = useNavigate()
   const {
     cartItems,
-    getItemQuantity
+    getItemQuantity,
+    closeCart,
+    removeCart
   } = useShoppingCart()
 
   const {
     handleOrder
   } = useConfirmOrder()
 
+  useEffect(()=>{
+    closeCart()
+  },[])
+
+
   const centerContentStyle: React.CSSProperties = {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    height: '20vh',
-  };
-
-  const Paymethod: React.CSSProperties = {
     height: '20vh',
   };
 
@@ -78,34 +83,6 @@ export default function ProductCon() {
         </h4>
       </div>
 
-      <div className="Paymethod" style={Paymethod}>
-        <Form>
-          <Form.Group>
-            <Form.Label>Payment Method</Form.Label>
-            <div>
-              <Form.Check
-                type="radio"
-                label="Cash on Delivery"
-                name="paymentMethod"
-                id="cashOnDelivery"
-              />
-              <Form.Check
-                type="radio"
-                label="Debit/Credit Card"
-                name="paymentMethod"
-                id="debitCreditCard"
-              />
-              <Form.Check
-                type="radio"
-                label="Paypal"
-                name="paymentMethod"
-                id="paypal"
-              />
-            </div>
-          </Form.Group>
-        </Form>
-      </div>
-
       <div className="Button" style={flexContainerStyle}>
         <Button onClick={()=>{
           Swal.fire({
@@ -115,15 +92,17 @@ export default function ProductCon() {
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
             confirmButtonText: "Yes!"
-          }).then((result) => {
+          }).then(async(result) => {
             if (result.isConfirmed) {
               handleOrder()
+              removeCart()
+              navigate('/order')
             }
           });
         }} variant="primary" type="submit" className="mx-2">
           Order
         </Button>
-        <Button variant="danger" type="submit" className="mx-2">
+        <Button onClick={()=>navigate('/store')} variant="danger" type="submit" className="mx-2">
           Cancel
         </Button>
       </div>

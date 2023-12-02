@@ -51,6 +51,7 @@ const upload = multer({storage : storage})
 router.get('/order', async (req, res) => {
     try {
         const purchases = await Purchase.find().populate('products orderID');
+        console.log(purchases)
 
         // Create a Map to store purchases grouped by orderID
         const groupedPurchases = new Map();
@@ -98,7 +99,7 @@ router.post('/slip',upload.single('image'),async(req,res)=>{
     
         purchase.map(async curr=>{
             if(curr.orderID.orderID === orderID) {
-                curr.status='wreer'
+                curr.status='Waiting for payment verification'
                 await curr.save()
             }
         })
