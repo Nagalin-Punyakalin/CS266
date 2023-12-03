@@ -4,16 +4,13 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Status from './Status';
 
-// Mock the useFetch hook
 jest.mock('../../../hooks/useFetch', () => () => [[], null]);
-
 describe('Status Component', () => {
   test('renders purchase list header', () => {
     render(<Status />);
     const headerElement = screen.getByText(/Purchase list/i);
-    expect(headerElement).toBeInTheDocument();
+    expect(headerElement).toBeInTheDocument('Header Not Found');
   });
-
   test('renders order details', () => {
     const orderData = [
       [
@@ -27,19 +24,19 @@ describe('Status Component', () => {
       ],
     ];
 
-    // Mock the Status hook to return the sample orderData
+    
     jest.mock('./Status', () => () => [orderData, null]);
 
     render(<Status />);
 
-    // Check if order details are rendered
+    
     const orderNumber = screen.getByText(/Order no\./i);
     const orderStatus = screen.getByText(/Order Status/i);
     const orderPrice = screen.getByText(/Order price/i);
 
-    expect(orderNumber).toBeInTheDocument();
-    expect(orderStatus).toBeInTheDocument();
-    expect(orderPrice).toBeInTheDocument();
+    expect(orderNumber).toBeInTheDocument('Number Not Found');
+    expect(orderStatus).toBeInTheDocument('Status Not Found');
+    expect(orderPrice).toBeInTheDocument('Price Not Found');
   });
 
 });
