@@ -1,5 +1,7 @@
 import React from 'react';
 import { Button, Table } from 'react-bootstrap';
+import { useNavigate, Link } from 'react-router-dom';
+
 
 import { formatCurrency } from '../../../utilities/formatCurrency';
 import useFetch from '../../../hooks/useFetch';
@@ -13,6 +15,7 @@ interface OrderItem {
 }
 
 export default function ProductCon() {
+  const navigate = useNavigate();
   const [data, error] = useFetch<OrderItem[][]>('/user/order', []);
 
   const centerContentStyle: React.CSSProperties = {
@@ -77,6 +80,10 @@ export default function ProductCon() {
   };
 
   const centerText: React.CSSProperties = {
+    textAlign: 'left',
+  };
+
+  const centerStatus: React.CSSProperties = {
     textAlign: 'center',
   };
 
@@ -124,8 +131,8 @@ export default function ProductCon() {
           <thead>
             <tr className='HeadList' style={HeadList}>
               <th style={borderedCellLeft}>Order no.</th>
-              <th style={borderMiddle}>Order Status</th>
-              <th style={borderedCellRight}>Order price</th>
+              <th style={borderMiddle}>Order Price</th>
+              <th style={borderedCellRight}>Order Status</th>
             </tr>
           </thead>
           <tbody style={RemoveLine}>
@@ -135,20 +142,18 @@ export default function ProductCon() {
               return (
                 <tr key={orderIndex} className='List' style={{ ...List, ...SpaceAfterList }}>
                   <td style={{ ...borderProductLeft, ...centerText }}>
-                    <strong>{++orderIndex}</strong>
-                    <p>Product Name</p>
+                    <strong>No. {++orderIndex}</strong>
+                    <p></p>
+                    <p>Product list</p>
                     {order.map((currItem, index) => (
                       <React.Fragment key={index}>
-                        <p>{currItem.productName}</p>
+                        <p>{++index}. {currItem.productName}</p>
                       </React.Fragment>
                     ))}
                   </td>
-                  <td style={{ ...borderProductMiddle, ...centerText }}>
-                    <p style={DeletText}> - </p>
-                    <strong>{order[0].status}</strong>
-                  </td>
                   <td style={{ ...borderProductRight, ...centerText }}>
-                    <strong className='Total price'>{formatCurrency(totalPrice)}</strong>
+                    <strong className='Total price'>Total price {formatCurrency(totalPrice)}</strong>
+                    <p></p>
                     <p>Price of each product</p>
                     {order.map((currItem, index) => (
                       <React.Fragment key={index}>
@@ -156,8 +161,15 @@ export default function ProductCon() {
                       </React.Fragment>
                     ))}
                   </td>
-                  <td style={ButtonAttachslip}>
-                    <Button variant="success">Attach slip</Button>
+                  <td style={{ ...borderProductMiddle, ...centerStatus }}>
+                    <p style={DeletText}> - </p>
+                    <strong>{order[0].status}</strong>
+                  </td>
+                  
+                  <td className='AttachSlip' style={ButtonAttachslip}>
+                  <Link to={`/SlipPayment/${totalPrice}`}>
+                  <Button variant="success">Attach slip</Button>
+                  </Link>
                   </td>
                 </tr>
               );

@@ -4,7 +4,7 @@ import { useShoppingCart } from '../../../context/ShoppingCartContext';
 import { formatCurrency } from '../../../utilities/formatCurrency';
 import Swal from 'sweetalert2';
 import useConfirmOrder from '../hook/useConfirmOrder';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 export default function ProductCon() {
   const navigate = useNavigate()
   const {
