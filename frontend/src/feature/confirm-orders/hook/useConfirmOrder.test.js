@@ -2,7 +2,7 @@ import { renderHook, act } from '@testing-library/react';
 import useConfirmOrder from './useConfirmOrder';
 import axios from '../../../lib/axios';
 import Swal from 'sweetalert2';
-import { useShoppingCart } from '../../../context/ShoppingCartContext';
+import React from 'react';
 jest.mock('../../../context/ShoppingCartContext', () => ({
   useShoppingCart: jest.fn(() => ({
     cartItems: [
@@ -11,7 +11,13 @@ jest.mock('../../../context/ShoppingCartContext', () => ({
     ],
     getItemQuantity: jest.fn(),
     getItemTotal: jest.fn(),
+    removeCart: jest.fn()
   })),
+}));
+
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useNavigate: jest.fn(),
 }));
 
 jest.mock('../../../lib/axios');
@@ -25,7 +31,7 @@ describe('Unit test useConfirmOrder hook', () => {
   });
 
   it('should be able to confirm the order', async () => {
-    const { result } = renderHook(() => useConfirmOrder());
+    const { result } = renderHook(() =>useConfirmOrder());
 
     axios.put.mockResolvedValue({
       status: 200,

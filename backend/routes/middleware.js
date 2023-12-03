@@ -1,5 +1,4 @@
 const passport = require("../passport/passport-config");
-const Account = require('../database/Account')
 
 function isAuthenticated(req, res, next) {
     const token = req.headers.authorization;
