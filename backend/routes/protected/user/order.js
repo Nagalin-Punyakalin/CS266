@@ -94,6 +94,7 @@ router.post('/slip',upload.single('image'),async(req,res)=>{
         order.slipName = req.file.filename
         await order.save()
         const purchase = await Purchase.find().populate('orderID')
+        console.log(purchase)
     
         purchase.map(async curr=>{
             if(curr.orderID.orderID === orderID) {

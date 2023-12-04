@@ -1,7 +1,11 @@
 const request = require('supertest');
 const server = require('../../../../index');
 const Purchase = require('../../../../database/Purchase')
+const Order = require('../../../../database/Order')
+const path = require('path');
+const fs = require('fs').promises;
 jest.mock('../../../../database/Product')
+jest.mock('../../../../database/Order')
 jest.mock('../../../../database/Purchase')
 
 const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIiLCJyb2xlIjoidXNlciIsImlhdCI6MTcwMDE2MTI4MH0.lgHTAj_hx6MuWNXhdxVAFZvVX63MZHY7dg9WC57unkY'
@@ -10,7 +14,7 @@ describe('Unit test for get /user/order endpoint',()=>{
   afterEach(()=>{
     server.close()
 },10000)
-jest.mock('../../../../database/Order')
+
 it('should fetch all the orders in the database', async () => {
   // Mocking the Purchase.find method
   Purchase.find.mockImplementationOnce(() => ({
@@ -69,34 +73,79 @@ describe('Unit test for post /user/slip endpoint',()=>{
     server.close()
   },10000)
 
-  const Order = require('../../../../database/Order')
-
-  it('should save slip name in DB', async () => {
-    // Mocking Order
-    const mockOrder = new Order();
-    mockOrder.orderID = Math.floor(Math.random() * 1000);
-    await mockOrder.save(); 
-    console.log('Order ID:', mockOrder.orderID);
-
-    // Mocking Slip
+  it('should save slip name in DB and save image to backend/public', async () => {
+    //Mocking Order.findOne
+    Order.findOne = jest.fn().mockImplementationOnce(() => {
+      return {
+        orderID: 123,
+        slipName: 'mock-slip.png',
+        save: jest.fn().mockResolvedValue({
+          orderID: 123,
+          slipName: 'mock-slip.png',
+        }),
+      };
+    });
+    //Mocking Purchase.findOne
+    Purchase.find.mockImplementationOnce(() => ({
+      populate: jest.fn().mockResolvedValue([
+        {
+         
+          quantity: 2,
+          status: 'Pending payment',
+          total: 200,
+         
+          orderID: {
+           
+            orderID: 109,
+            __v: 0
+          },
+          __v: 0
+        },
+      ]),
+    }));
+    //Mocking Slip
     const mockSlip = {
       buffer: Buffer.from('mock slip content'),
       slipName: 'mock-slip.png',
     };
-    console.log('test222222222222222');
+    //Use /user/slip API
     const response = await request(server)
-      .post('/slip')
-      .field('orderID', mockOrder.orderID)
-      //.attach('image', mockSlip.buffer, mockSlip.slipName)
+      .post('/user/slip')
+      .field('orderID', 123)
+      .attach('image', mockSlip.buffer, mockSlip.slipName)
       .set('authorization', `Bearer ${token}`);
-    console.log('Response status:' ,response);
+    console.log('Response message:' , response.body.message);
+    //Check status and body.message
     expect(response.status).toBe(201);
     expect(response.body.message).toBe('Your slip have been uploaded');
 
+    const publicFolderPath = path.join(__dirname, '../../../../public');
+    const filesInPublic = await fs.readdir(publicFolderPath);
+    const uploadedFileName = filesInPublic.find(file => file.startsWith('mock-slip'));
+    expect(uploadedFileName).toBeDefined();
+
+    await fs.unlink(path.join(publicFolderPath, uploadedFileName))
+      .then(() => {
+        console.log(`File ${uploadedFileName} is deleted`);
+      })
+      .catch((error) => {
+        console.error(`Can't delete ${uploadedFileName}:`, error);
+      });
+  });
+
+  it('should handle order not found', async () => {
+    // Mock the findOne method of Order to simulate not finding an order
+    Order.findOne.mockResolvedValueOnce(null);
     
-    const updatedOrder = await Order.findOne({ orderID: mockOrder.orderID });
-    console.log('Slip name:', updatedOrder.slipName);
-    expect(updatedOrder.slipName).toBe(mockSlip.slipName);
+    const response = await request(server)
+      .post('/user/slip')
+      .field('orderID', -1)
+      .set('authorization', `Bearer ${token}`);
+    console.log('Response message:' , response.body.message);
+
+    // Assert the response
+    expect(response.status).toBe(404);
+    expect(response.body.message).toBe('Order not found');
   });
 
 })
