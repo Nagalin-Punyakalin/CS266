@@ -1,17 +1,31 @@
-import React, { useState } from 'react';
-import { Button } from 'react-bootstrap';
-import { useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Button, Form } from 'react-bootstrap';
+import { useLocation } from 'react-router-dom';
 import { formatCurrency } from '../../../utilities/formatCurrency';
 import imgQR from '../../../../public/imgs/QR.png';
 import useUpload from '../hook/useUpload';
 
+type LocationState = {
+  totalPrice: number;
+  orderID : number
+}
 export default function SlipPayment() {
-  const { totalPrice } = useParams();
-  const totalPriceNumber = totalPrice ? Number(totalPrice) : 0;
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const location = useLocation()
+  const [totalPrice,setTotalPrice] = useState<number>(0)
+  const [orderID,setOrderID] = useState<number>(0)
+
+  useEffect(() => {
+    const state = location.state as LocationState;
+    if (state) {
+      setTotalPrice(state.totalPrice);
+      setOrderID(state.orderID)
+    }
+  }, []);
+
+  
 
 
-  const { handleSubmit, loading, error: uploadError } = useUpload({ orderID: '123' });
+  const { handleSubmit, error: uploadError ,handleFileChange} = useUpload(orderID);
 
   const center: React.CSSProperties = {
     display: 'flex',
@@ -26,15 +40,7 @@ export default function SlipPayment() {
     marginBottom: '10px',
   };
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      setSelectedFile(file);
-    }
-  };
-
-
-
+  
   const inputStyle: React.CSSProperties = {
     boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.1)',
     marginBottom: '10px',
@@ -57,23 +63,24 @@ export default function SlipPayment() {
       </section>
 
       <strong className='TotalPrice' style={center}>
-        Price: {formatCurrency(totalPriceNumber)}
+        Price: {formatCurrency(totalPrice)}
       </strong>
 
       <div style={center}>
-        <input type="file" onChange={handleFileChange} style={inputStyle} />
+        <input type="file" onChange={handleFileChange}  style={inputStyle} />
         <Button
           variant='light'
           style={{ marginBottom: '10px' }}
-          onClick={handleUploadClick}
-          disabled={loading}
         >
-          {loading ? 'Uploading...' : 'Upload slip file'}
+         
         </Button>
         {uploadError && <p style={{ color: 'red' }}>{uploadError}</p>}
-        <Button variant='primary' style={{ marginBottom: '10px' }}>
+        <Form onSubmit={handleSubmit}>
+
+        <Button type='submit' variant='primary' style={{ marginBottom: '10px' }}>
           Submit
         </Button>
+        </Form>
       </div>
     </>
   );

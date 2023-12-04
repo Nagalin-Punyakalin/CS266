@@ -156,6 +156,7 @@ export default function ProductCon() {
                     {order.map((currItem, index) => (
                       <React.Fragment key={index}>
                         <p>qty. {currItem.quantity} {formatCurrency(currItem.total)}</p>
+                        <Button onClick={()=>navigate('/slipPayment',{state: {totalPrice : totalPrice,orderID : currItem.orderID}})}variant="success">Attach slip</Button>
                       </React.Fragment>
                     ))}
                   </td>
@@ -166,7 +167,6 @@ export default function ProductCon() {
                   
                   <td className='AttachSlip' style={ButtonAttachslip}>
                  
-                  <Button onClick={()=>navigate('slipPayment',{state: {totalPrice : totalPrice,orderID : currItem.orderID}})}variant="success">Attach slip</Button>
                  
                   </td>
                 </tr>

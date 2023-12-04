@@ -2,18 +2,18 @@ import React, { FormEvent, useRef,useState } from 'react'
 import axios from '../../../lib/axios'
 import Swal from 'sweetalert2';
 
-export default function useUpload() {
-    const [orderID,setOrderID] = useState<number>()
+
+export default function useUpload(orderID : number) {
     const [error,setError] = useState<string>('')
     const [file,setFile] = useState<File | undefined>()
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) : void=>{
         e.preventDefault()
         const formData = new FormData()
-        formData.append('orderID' , orderID)
+        formData.append('orderID' ,orderID.toString())
         formData.append('image' , file!)
 
-        axios.put('/admin/product',formData)
+        axios.post('/user/slip',formData)
         .then(response=>{
             if(response.status === 201) {
                 Swal.fire(response.data.message, '', 'success')
@@ -31,8 +31,6 @@ export default function useUpload() {
       };
 
     return {
-        name,
-        price,
         error,
         file,
         handleFileChange,
