@@ -20,7 +20,8 @@ describe('Unit test useUpload hook', () => {
   });
 
   it('should save a slip to the database', async () => {
-    const { result } = renderHook(() => useUpload());
+    const { result } = renderHook(() => useUpload(1112));
+
 
     axios.post.mockResolvedValue({
       status: 201,
@@ -31,13 +32,13 @@ describe('Unit test useUpload hook', () => {
       result.current.handleSubmit(mockEvent);
     });
 
-    expect(axios.post).toHaveBeenCalledWith('/api/upload-slip', expect.any(FormData));
+    expect(axios.post).toHaveBeenCalledWith('/user/slip', expect.any(FormData));
     expect(Swal.fire).toHaveBeenCalledWith('Your slip has been uploaded', '', 'success');
     expect(result.current.error).toBe('');
   });
 
   it('should handle internal server error', async () => {
-    const { result } = renderHook(() => useUpload());
+    const { result } = renderHook(() => useUpload(1112));
 
     axios.post.mockRejectedValue({
       response: {
@@ -52,7 +53,7 @@ describe('Unit test useUpload hook', () => {
       result.current.handleSubmit(mockEvent);
     });
 
-    expect(axios.post).toHaveBeenCalledWith('/api/upload-slip', expect.any(FormData));
+    expect(axios.post).toHaveBeenCalledWith('/user/slip', expect.any(FormData));
     expect(result.current.error).toBe('Internal server error, please try again later');
   });
 });
