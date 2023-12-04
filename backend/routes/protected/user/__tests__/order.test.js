@@ -86,9 +86,23 @@ describe('Unit test for post /user/slip endpoint',()=>{
       };
     });
     //Mocking Purchase.findOne
-    Purchase.findOne.mockImplementationOnce(() => {
-      return { quantity: 1, status: 'test', total: 1, orderID: 123};
-    });
+    Purchase.find.mockImplementationOnce(() => ({
+      populate: jest.fn().mockResolvedValue([
+        {
+         
+          quantity: 2,
+          status: 'Pending payment',
+          total: 200,
+         
+          orderID: {
+           
+            orderID: 109,
+            __v: 0
+          },
+          __v: 0
+        },
+      ]),
+    }));
     //Mocking Slip
     const mockSlip = {
       buffer: Buffer.from('mock slip content'),

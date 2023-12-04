@@ -1,8 +1,6 @@
 import React from 'react';
 import { Button, Table } from 'react-bootstrap';
 import { useNavigate, Link } from 'react-router-dom';
-
-
 import { formatCurrency } from '../../../utilities/formatCurrency';
 import useFetch from '../../../hooks/useFetch';
 
