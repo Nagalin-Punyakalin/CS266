@@ -67,7 +67,7 @@ export default function SlipPayment() {
       </strong>
 
       <div style={center}>
-        <input type="file" onChange={handleFileChange}  style={inputStyle} />
+        <input required type="file" onChange={handleFileChange}  style={inputStyle} />
         <Button
           variant='light'
           style={{ marginBottom: '10px' }}

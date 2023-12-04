@@ -1,0 +1,108 @@
+<mxfile host="app.diagrams.net" modified="2023-11-21T21:09:57.678Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36" etag="v5ijq_3nec7b--c7yQef" version="21.8.2" type="device">
+  <diagram name="Page-1" id="aWuao_ow0Jp5oxHENNFt">
+    <mxGraphModel dx="913" dy="509" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="VKNgyk9UqXUZ5JBSV-sY-1" value="&lt;div style=&quot;text-indent: 48px;&quot;&gt;&lt;br&gt;&lt;/div&gt;" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;align=center;" parent="1" vertex="1">
+          <mxGeometry x="325" y="290" width="170" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="VKNgyk9UqXUZ5JBSV-sY-2" value="Web application" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="355" y="360" width="110" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="VKNgyk9UqXUZ5JBSV-sY-3" value="" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="350" y="115" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="VKNgyk9UqXUZ5JBSV-sY-4" value="เจ้าหน้าที่ฝ่ายบัญชี" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="350" y="130" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="VKNgyk9UqXUZ5JBSV-sY-5" value="" style="endArrow=none;html=1;rounded=0;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="310" y="225" as="sourcePoint" />
+            <mxPoint x="360" y="175" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VKNgyk9UqXUZ5JBSV-sY-7" value="ยืนยันข้อมูล" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="280" y="220" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="VKNgyk9UqXUZ5JBSV-sY-8" value="" style="endArrow=classic;html=1;rounded=0;entryX=0.197;entryY=0.112;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" edge="1" target="VKNgyk9UqXUZ5JBSV-sY-1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="310" y="250" as="sourcePoint" />
+            <mxPoint x="353.93000000000006" y="304.11" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VKNgyk9UqXUZ5JBSV-sY-9" value="" style="endArrow=none;html=1;rounded=0;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="409.74" y="223.75" as="sourcePoint" />
+            <mxPoint x="409.74" y="173.75" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VKNgyk9UqXUZ5JBSV-sY-12" value="แก้ไขข้อมูล" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="380" y="220" width="60" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="VKNgyk9UqXUZ5JBSV-sY-14" value="" style="endArrow=classic;html=1;rounded=0;entryX=0.441;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="409.73999999999995" y="260" as="sourcePoint" />
+            <mxPoint x="410.05" y="290" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="410.08" y="240" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VKNgyk9UqXUZ5JBSV-sY-17" value="ดูข้อมูล&lt;br&gt;แต่ละโครงการ" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="460" y="212.5" width="110" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="VKNgyk9UqXUZ5JBSV-sY-27" value="" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="650" y="345" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="VKNgyk9UqXUZ5JBSV-sY-28" value="ผู้คืนงบประมาณ" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="670" y="353.75" width="80" height="42.5" as="geometry" />
+        </mxCell>
+        <mxCell id="VKNgyk9UqXUZ5JBSV-sY-29" value="" style="endArrow=none;html=1;rounded=0;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="610.24" y="374.64" as="sourcePoint" />
+            <mxPoint x="650" y="374.64" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VKNgyk9UqXUZ5JBSV-sY-30" value="กรอกใบเสร็จ" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="540" y="360" width="70" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="VKNgyk9UqXUZ5JBSV-sY-31" value="" style="endArrow=classic;html=1;rounded=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" parent="1" edge="1" source="VKNgyk9UqXUZ5JBSV-sY-30">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="535" y="374.64" as="sourcePoint" />
+            <mxPoint x="495" y="374.64" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Ah3XJx8W3EjQKptutjFD-1" value="เจ้าของโครงการ" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="20" y="345" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Ah3XJx8W3EjQKptutjFD-2" value="" style="endArrow=classic;html=1;rounded=0;entryX=0.002;entryY=0.589;entryDx=0;entryDy=0;entryPerimeter=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="Ah3XJx8W3EjQKptutjFD-1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="210" y="374.57" as="sourcePoint" />
+            <mxPoint x="325.3399999999999" y="374.7" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="290" y="374.57" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Ah3XJx8W3EjQKptutjFD-3" value="กรอกเอกสารโครงการ" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="Ah3XJx8W3EjQKptutjFD-2">
+          <mxGeometry x="-0.1496" y="-2" relative="1" as="geometry">
+            <mxPoint x="15" y="-2" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Ah3XJx8W3EjQKptutjFD-8" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="445" y="175" as="sourcePoint" />
+            <mxPoint x="505" y="215" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Ah3XJx8W3EjQKptutjFD-9" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1" target="VKNgyk9UqXUZ5JBSV-sY-1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="505" y="250" as="sourcePoint" />
+            <mxPoint x="465" y="282.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

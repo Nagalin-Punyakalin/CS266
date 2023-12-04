@@ -8,6 +8,7 @@ jest.mock('sweetalert2', () => ({
   fire: jest.fn(),
 }));
 
+
 describe('Unit test useUpload hook', () => {
   let mockEvent;
 

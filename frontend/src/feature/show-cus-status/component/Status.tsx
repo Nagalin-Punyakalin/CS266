@@ -164,9 +164,15 @@ export default function ProductCon() {
               <strong>{order[0].status}</strong>
               
               </td>
-              <td style={ButtonAttachslip}>
-              <Button className='sumiitButton' onClick={() => navigate('/slipPayment', { state: { totalPrice: totalPrice, orderID: order[0].orderID } })} variant="success">Attach slip</Button>
-              </td>
+              {
+                order[0].status === 'Pending payment' ? (
+                  <td style={ButtonAttachslip}>
+                    <Button className='sumiitButton' onClick={() => navigate('/slipPayment', { state: { totalPrice: totalPrice, orderID: order[0].orderID } })} variant="success">Attach slip</Button>
+                  </td>
+                ) : null
+              }
+
+             
               </tr>
             );
           })}
