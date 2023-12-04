@@ -30,7 +30,7 @@ function App() {
           <Route path="/buyproduct" element={<BuyProduct />} />
           <Route path="/addcustomerinfo" element={<AddCustomerInfo/>} />
           <Route path="/addproduct" element={<AddProduct/>} />
-          <Route path="/SlipPayment/:totalPrice" element={<SlipPayment />} />
+          <Route path="/slipPayment" element={<SlipPayment />} />
           </Route>
         </Route>
         </Routes>

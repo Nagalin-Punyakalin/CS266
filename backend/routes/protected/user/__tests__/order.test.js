@@ -89,13 +89,10 @@ describe('Unit test for post /user/slip endpoint',()=>{
     Purchase.find.mockImplementationOnce(() => ({
       populate: jest.fn().mockResolvedValue([
         {
-         
           quantity: 2,
           status: 'Pending payment',
           total: 200,
-         
           orderID: {
-           
             orderID: 109,
             __v: 0
           },

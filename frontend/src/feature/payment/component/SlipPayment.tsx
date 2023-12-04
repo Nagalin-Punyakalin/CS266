@@ -33,13 +33,7 @@ export default function SlipPayment() {
     }
   };
 
-  const handleUploadClick = async () => {
-    if (selectedFile) {
-      await handleSubmit(selectedFile);
-    } else {
-      alert('Please select a file before uploading.');
-    }
-  };
+
 
   const inputStyle: React.CSSProperties = {
     boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.1)',

@@ -11,7 +11,6 @@ export default function ProductCon() {
     cartItems,
     getItemQuantity,
     closeCart,
-    removeCart
   } = useShoppingCart()
 
   const {

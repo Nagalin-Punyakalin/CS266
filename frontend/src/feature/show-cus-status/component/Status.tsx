@@ -165,9 +165,9 @@ export default function ProductCon() {
                   </td>
                   
                   <td className='AttachSlip' style={ButtonAttachslip}>
-                  <Link to={`/SlipPayment/${totalPrice}`}>
-                  <Button variant="success">Attach slip</Button>
-                  </Link>
+                 
+                  <Button onClick={()=>navigate('slipPayment',{state: {totalPrice : totalPrice,orderID : currItem.orderID}})}variant="success">Attach slip</Button>
+                 
                   </td>
                 </tr>
               );
