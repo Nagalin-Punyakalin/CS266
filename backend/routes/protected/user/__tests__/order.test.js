@@ -145,4 +145,22 @@ describe('Unit test for post /user/slip endpoint',()=>{
     expect(response.body.message).toBe('Order not found');
   });
 
+  it('should handle internal error',async ()=>{
+    // Mock the findOne method of Order to simulate not finding an order
+    Order.findOne.mockResolvedValueOnce(()=> {
+      throw new Error('MongoDB error')
+    });
+    
+    const response = await request(server)
+      .post('/user/slip')
+      .field('orderID', -1)
+      .set('authorization', `Bearer ${token}`);
+    console.log('Response message:' , response.body.message);
+
+    // Assert the response
+    expect(response.status).toBe(500);
+    expect(response.body.message).toBe('Internal server error, please try again later');
+
+  })
+
 })

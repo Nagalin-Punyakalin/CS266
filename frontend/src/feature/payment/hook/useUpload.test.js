@@ -7,7 +7,10 @@ jest.mock('../../../lib/axios');
 jest.mock('sweetalert2', () => ({
   fire: jest.fn(),
 }));
-
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useNavigate: jest.fn(() => () => {})
+}));
 
 describe('Unit test useUpload hook', () => {
   let mockEvent;
@@ -32,6 +35,8 @@ describe('Unit test useUpload hook', () => {
     await act(async () => {
       result.current.handleSubmit(mockEvent);
     });
+
+    console.log(axios.post.mock.calls)
 
     expect(axios.post).toHaveBeenCalledWith('/user/slip', expect.any(FormData));
     expect(Swal.fire).toHaveBeenCalledWith('Your slip has been uploaded', '', 'success');
