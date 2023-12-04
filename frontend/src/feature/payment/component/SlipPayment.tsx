@@ -1,12 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import { formatCurrency } from '../../../utilities/formatCurrency';
 import imgQR from '../../../../public/imgs/QR.png';
+import useUpload from '../hook/useUpload';
 
 export default function SlipPayment() {
   const { totalPrice } = useParams();
   const totalPriceNumber = totalPrice ? Number(totalPrice) : 0;
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+
+
+  const { handleSubmit, loading, error: uploadError } = useUpload({ orderID: '123' });
 
   const center: React.CSSProperties = {
     display: 'flex',
@@ -15,18 +20,29 @@ export default function SlipPayment() {
     flexDirection: 'column',
   };
 
-  const details: React.CSSProperties = {
-    textAlign: 'left',
-  };
-
-  const buttonStyle = {
-    marginBottom: '10px',
-    boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.1)',
-  };
-
   const imgStyle: React.CSSProperties = {
     width: '10%',
     height: 'auto',
+    marginBottom: '10px',
+  };
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      setSelectedFile(file);
+    }
+  };
+
+  const handleUploadClick = async () => {
+    if (selectedFile) {
+      await handleSubmit(selectedFile);
+    } else {
+      alert('Please select a file before uploading.');
+    }
+  };
+
+  const inputStyle: React.CSSProperties = {
+    boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.1)',
     marginBottom: '10px',
   };
 
@@ -34,31 +50,34 @@ export default function SlipPayment() {
     <>
       <div className='Header' style={center}>
         <h1>Payment</h1>
-        <p></p>
       </div>
 
-      <div className='details' style={center}>
+      <section style={center}>
         <p>Payment method</p>
-        <td>
-        <p>1. Select a banking app</p>
-        <p>2. Scan the QR code below</p>
-        <p>3. Send slip</p>
-        </td>
+        <div>
+          <p>1. Select a banking app</p>
+          <p>2. Scan the QR code below</p>
+          <p>3. Send slip</p>
+        </div>
         <img src={imgQR} alt="QR Code" style={imgStyle} />
-      </div>
-      <p></p>
-      
+      </section>
 
       <strong className='TotalPrice' style={center}>
-        Price : {formatCurrency(totalPriceNumber)}
+        Price: {formatCurrency(totalPriceNumber)}
       </strong>
-      <p></p>
+
       <div style={center}>
-        <Button variant='light' style={buttonStyle}>
-          Upload slip file
+        <input type="file" onChange={handleFileChange} style={inputStyle} />
+        <Button
+          variant='light'
+          style={{ marginBottom: '10px' }}
+          onClick={handleUploadClick}
+          disabled={loading}
+        >
+          {loading ? 'Uploading...' : 'Upload slip file'}
         </Button>
-        <p></p>
-        <Button variant='primary' style={buttonStyle}>
+        {uploadError && <p style={{ color: 'red' }}>{uploadError}</p>}
+        <Button variant='primary' style={{ marginBottom: '10px' }}>
           Submit
         </Button>
       </div>
