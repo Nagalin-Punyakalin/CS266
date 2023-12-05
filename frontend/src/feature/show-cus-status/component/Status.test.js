@@ -5,12 +5,18 @@ import userEvent from '@testing-library/user-event';
 import Status from './Status';
 
 jest.mock('../../../hooks/useFetch', () => () => [[], null]);
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useNavigate: jest.fn(),
+}));
 describe('Status Component', () => {
   test('renders purchase list header', () => {
     render(<Status />);
     const headerElement = screen.getByText(/Purchase list/i);
     expect(headerElement).toBeInTheDocument('Header Not Found');
   });
+
+
   test('renders order details', () => {
     const orderData = [
       [
@@ -38,5 +44,7 @@ describe('Status Component', () => {
     expect(orderStatus).toBeInTheDocument('Status Not Found');
     expect(orderPrice).toBeInTheDocument('Price Not Found');
   });
+
+  
 
 });

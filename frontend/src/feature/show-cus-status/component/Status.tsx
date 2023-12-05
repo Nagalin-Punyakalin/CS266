@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Table } from 'react-bootstrap';
-
+import { useNavigate, Link } from 'react-router-dom';
 import { formatCurrency } from '../../../utilities/formatCurrency';
 import useFetch from '../../../hooks/useFetch';
 
@@ -13,6 +13,7 @@ interface OrderItem {
 }
 
 export default function ProductCon() {
+  const navigate = useNavigate();
   const [data, error] = useFetch<OrderItem[][]>('/user/order', []);
 
   const centerContentStyle: React.CSSProperties = {
@@ -77,6 +78,10 @@ export default function ProductCon() {
   };
 
   const centerText: React.CSSProperties = {
+    textAlign: 'left',
+  };
+
+  const centerStatus: React.CSSProperties = {
     textAlign: 'center',
   };
 
@@ -124,44 +129,53 @@ export default function ProductCon() {
           <thead>
             <tr className='HeadList' style={HeadList}>
               <th style={borderedCellLeft}>Order no.</th>
-              <th style={borderMiddle}>Order Status</th>
-              <th style={borderedCellRight}>Order price</th>
+              <th style={borderMiddle}>Order Price</th>
+              <th style={borderedCellRight}>Order Status</th>
             </tr>
           </thead>
           <tbody style={RemoveLine}>
-            {data?.map((order, orderIndex) => {
-              const totalPrice = order.reduce((acc, currItem) => acc + currItem.total, 0);
+          {data?.map((order, orderIndex) => {
+          const totalPrice = order.reduce((acc, currItem) => acc + currItem.total, 0);
 
-              return (
-                <tr key={orderIndex} className='List' style={{ ...List, ...SpaceAfterList }}>
-                  <td style={{ ...borderProductLeft, ...centerText }}>
-                    <strong>{++orderIndex}</strong>
-                    <p>Product Name</p>
-                    {order.map((currItem, index) => (
-                      <React.Fragment key={index}>
-                        <p>{currItem.productName}</p>
-                      </React.Fragment>
-                    ))}
-                  </td>
-                  <td style={{ ...borderProductMiddle, ...centerText }}>
-                    <p style={DeletText}> - </p>
-                    <strong>{order[0].status}</strong>
-                  </td>
-                  <td style={{ ...borderProductRight, ...centerText }}>
-                    <strong className='Total price'>{formatCurrency(totalPrice)}</strong>
-                    <p>Price of each product</p>
-                    {order.map((currItem, index) => (
-                      <React.Fragment key={index}>
-                        <p>qty. {currItem.quantity} {formatCurrency(currItem.total)}</p>
-                      </React.Fragment>
-                    ))}
-                  </td>
+          return (
+              <tr key={orderIndex} className='List' style={{ ...List, ...SpaceAfterList }}>
+              <td style={{ ...borderProductLeft, ...centerText }}>
+              <strong>No. {++orderIndex}</strong>
+              <p></p>
+              <p>Product list</p>
+            {order.map((currItem, index) => (
+              <React.Fragment key={index}>
+              <p>{++index}. {currItem.productName}</p>
+              </React.Fragment>
+            ))}
+            </td>
+                <td style={{ ...borderProductRight, ...centerText }}>
+                <strong className='Total price'>Total price {formatCurrency(totalPrice)}</strong>
+                <p></p>
+                <p>Price of each product</p>
+                {order.map((currItem, index) => (
+                  <React.Fragment key={index}>
+                  <p>qty. {currItem.quantity} {formatCurrency(currItem.total)}</p>
+                  </React.Fragment>
+                ))}
+              </td>
+              <td style={{ ...borderProductMiddle, ...centerStatus }}>
+              <p style={DeletText}> - </p>
+              <strong>{order[0].status}</strong>
+              
+              </td>
+              {
+                order[0].status === 'Pending payment' ? (
                   <td style={ButtonAttachslip}>
-                    <Button variant="success">Attach slip</Button>
+                    <Button className='sumiitButton' onClick={() => navigate('/slipPayment', { state: { totalPrice: totalPrice, orderID: order[0].orderID } })} variant="success">Attach slip</Button>
                   </td>
-                </tr>
-              );
-            })}
+                ) : null
+              }
+
+             
+              </tr>
+            );
+          })}
           </tbody>
         </Table>
       </div>

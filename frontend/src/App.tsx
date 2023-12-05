@@ -11,6 +11,7 @@ import { Login } from "./pages/Login"
 import { Navbar } from "./components/Navbar"
 import { ShoppingCartProvider } from "./context/ShoppingCartContext"
 import { AuthProvider } from "./context/AuthContext"
+import { SlipPayment } from "./pages/Payment"
 import Protected from "./components/Protected"
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
           <Route path="/buyproduct" element={<BuyProduct />} />
           <Route path="/addcustomerinfo" element={<AddCustomerInfo/>} />
           <Route path="/addproduct" element={<AddProduct/>} />
+          <Route path="/slipPayment" element={<SlipPayment />} />
           </Route>
         </Route>
         </Routes>
