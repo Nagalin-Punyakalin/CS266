@@ -30,7 +30,7 @@ To run this project, you need to set up your own environment variables. Here's h
 
 ### setting up your mongoDB schema
 #### you need to add account schema to your database in order to be able to login with following fields
-		username:  String,
-		password:  String,
-		role:  String
+username:  String,
+password:  String,
+role:  String
 username contains username that you used to login , password contains a hashed password, role has two role, user or admin
