@@ -11,7 +11,7 @@ const address = new mongoose.Schema({
     subDistrict : String,
     subArea : String,
     province : String,
-    postalCode : String,
+    postalCode : Number,
   });
 
 module.exports =  mongoose.model('Address',address)

@@ -122,7 +122,7 @@ export default function InformationForm() {
           <Form.Label>Postal Code</Form.Label>
           <Form.Control
             ref = {postalCode}
-            type="text"
+            type="number"
             placeholder="Enter your postal code"
           />
         </Form.Group>
